@@ -4,69 +4,84 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    q: "What exactly is Sintra AI?",
-    a: "Sintra is a platform of 12 specialized AI assistants (helpers) that automate your business tasks. Each helper is trained for a specific role — copywriting, SEO, customer support, social media, email marketing, and more.",
+    q: "What is AI employee?",
+    a: "An AI employee is a digital worker powered by artificial intelligence that can autonomously handle specific business tasks — like customer support, copywriting, SEO, and more — 24/7 without breaks.",
   },
   {
-    q: "How is this different from ChatGPT?",
-    a: "ChatGPT is a general-purpose chat tool. Sintra's helpers are specialized, proactive, and trained on your business data via Brain AI. They don't wait for instructions — they complete tasks autonomously based on your goals.",
+    q: "Is there a money-back guarantee?",
+    a: "Yes. Sintra offers a money-back guarantee. If you're not satisfied, contact our support team and we'll make it right.",
   },
   {
-    q: "What is Brain AI?",
-    a: "Brain AI is your central knowledge hub. Upload your brand guidelines, SOPs, product info, and tone of voice docs. Every helper reads this so all outputs are tailored to your specific business — not generic AI text.",
+    q: "Can I invite my team to use Sintra?",
+    a: "Absolutely. Sintra supports team collaboration so you can invite teammates and work together with your AI employees.",
   },
   {
-    q: "Can I try it before paying?",
-    a: "Yes! All plans come with a 7-day free trial. No credit card required. You get full access to your chosen helpers and Brain AI during the trial period.",
+    q: "What can I use Sintra's AI employees for?",
+    a: "You can use them for social media management, email marketing, SEO, customer support, sales outreach, copywriting, data analysis, and much more.",
   },
   {
-    q: "What integrations are available?",
-    a: "Sintra integrates with Gmail, Outlook, Google Calendar, Google Drive, Slack, Notion, Shopify, Facebook, Instagram, LinkedIn, and 50+ more tools. New integrations are added regularly.",
+    q: "How to use Sintra's AI employees?",
+    a: "Simply sign up, pick your AI employee, give them context about your business via Brain AI, and start delegating tasks. It's as simple as having a conversation.",
   },
   {
-    q: "Is my data safe?",
-    a: "Absolutely. Sintra is SOC 2 compliant, GDPR ready, and uses end-to-end encryption. Your documents and data are never used to train AI models or shared with third parties.",
-  },
-  {
-    q: "Can I switch plans or cancel anytime?",
-    a: "Yes. You can upgrade, downgrade, or cancel your subscription at any time from your dashboard. No contracts, no cancellation fees, no questions asked.",
+    q: "Can AI employees replace human employees?",
+    a: "AI employees handle repetitive, time-consuming tasks so your human team can focus on higher-value work. They augment your team rather than replace the human element.",
   },
 ];
 
 export default function FAQ() {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section className="py-24">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
-          <div className="section-tag mb-5 mx-auto w-fit">❓ FAQ</div>
-          <h2 className="text-4xl sm:text-5xl font-bold">
-            Got Questions?{" "}
-            <span className="gradient-text">We Got Answers</span>
-          </h2>
-        </div>
+    <section className="bg-black py-24">
+      <div className="max-w-[1440px] mx-auto px-[7%]">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
-        <div className="space-y-2">
-          {faqs.map((faq, i) => (
-            <div key={i} className="feature-card rounded-xl overflow-hidden">
-              <button
-                className="w-full flex items-center justify-between px-6 py-5 text-left"
-                onClick={() => setOpen(open === i ? null : i)}>
-                <span className="text-white font-medium text-base">{faq.q}</span>
-                <ChevronDown
-                  size={18}
-                  className="text-white/40 flex-shrink-0 ml-4 transition-transform duration-200"
-                  style={{ transform: open === i ? "rotate(180deg)" : "rotate(0deg)" }}
-                />
-              </button>
-              {open === i && (
-                <div className="px-6 pb-5 text-white/50 text-sm leading-relaxed border-t border-white/5 pt-4">
-                  {faq.a}
-                </div>
-              )}
-            </div>
-          ))}
+          {/* Left */}
+          <div className="max-w-[460px]">
+            <h2
+              className="text-[48px] lg:text-[56px] text-white leading-[1.1] mb-8"
+              style={{ fontWeight: 500 }}
+            >
+              AI Employee FAQs.Let&apos;s clear things up.
+            </h2>
+            <p className="text-[15px] text-white/50 leading-[1.7] mb-5">
+              Yes, we understand - AI-powered solutions, business automation tools,
+              AI workers, digital AI staff... a lot of big words can get confusing.
+            </p>
+            <p className="text-[15px] text-white/50 leading-[1.7]">
+              We&apos;re here to clear the air - and if you still feel the need to ask AI
+              questions - Cassie is ready to answer 24/7.
+            </p>
+          </div>
+
+          {/* Right — accordion */}
+          <div className="w-full">
+            {faqs.map((faq, i) => (
+              <div key={i} className="border-b border-white/15">
+                <button
+                  className="w-full flex items-center justify-between py-6 text-left group"
+                  onClick={() => setOpen(open === i ? null : i)}
+                >
+                  <span className="text-[17px] text-white font-medium pr-8">
+                    {faq.q}
+                  </span>
+                  <ChevronDown
+                    size={20}
+                    className="text-white flex-shrink-0 transition-transform duration-200"
+                    style={{ transform: open === i ? "rotate(180deg)" : "rotate(0deg)" }}
+                  />
+                </button>
+                {open === i && (
+                  <div className="pb-6 text-[15px] text-white/50 leading-[1.7]">
+                    {faq.a}
+                  </div>
+                )}
+              </div>
+            ))}
+            {/* Top border for first item */}
+          </div>
+
         </div>
       </div>
     </section>

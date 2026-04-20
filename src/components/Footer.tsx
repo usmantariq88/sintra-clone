@@ -1,55 +1,113 @@
-const links = {
-  Product: ["Features", "AI Helpers", "Brain AI", "Integrations", "Pricing", "Changelog"],
-  Company: ["About", "Blog", "Careers", "Press", "Partners", "Contact"],
-  Resources: ["Documentation", "Help Center", "Community", "Webinars", "Case Studies", "Affiliate Program"],
-  Legal: ["Privacy Policy", "Terms of Service", "Cookie Policy", "GDPR", "Security"],
-};
+import Image from "next/image";
+import { Star } from "lucide-react";
+
+const columns = [
+  {
+    heading: "Features",
+    links: ["Sintra X", "Brain AI", "Power-ups"],
+  },
+  {
+    heading: "Resources",
+    links: ["Blog", "Case studies", "Book a Demo"],
+  },
+  {
+    heading: "About Us",
+    links: ["Become an Affiliate", "Careers", "How we compare"],
+  },
+  {
+    heading: "Support",
+    links: ["Help center", "Contact", "Plans and Payments"],
+  },
+  {
+    heading: "Legal",
+    links: [
+      "Privacy policy",
+      "Terms and conditions",
+      "Refund policy",
+      "Money-Back Guarantee",
+      "Fair use policy",
+      "Other policies",
+    ],
+  },
+];
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/5 py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-8 mb-12">
-          {/* Brand */}
-          <div className="col-span-2 sm:col-span-3 lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-8 h-8 rounded-lg btn-primary flex items-center justify-center text-white font-bold text-sm">S</div>
-              <span className="text-white font-bold text-xl tracking-tight">sintra</span>
-            </div>
-            <p className="text-white/35 text-sm leading-relaxed mb-5 max-w-xs">
-              Your 24/7 AI dream team. 12 specialized helpers that automate your business, around the clock.
+    <footer className="bg-white border-t border-gray-100">
+      <div className="max-w-[1440px] mx-auto px-[7%] py-20">
+
+        {/* Main row */}
+        <div className="flex flex-col lg:flex-row gap-16">
+
+          {/* Left — logo + copyright */}
+          <div className="flex-shrink-0 w-56">
+            <a href="#" className="inline-block mb-6">
+              <Image
+                src="/logoBlue.svg"
+                alt="Sintra"
+                width={110}
+                height={34}
+                priority
+              />
+            </a>
+            <p className="text-[14px] text-gray-400 leading-[1.7]">
+              Copyright © 2026<br />
+              PlayOS, Inc.<br />
+              All rights reserved
             </p>
-            <div className="flex items-center gap-3">
-              {["𝕏", "in", "f", "📷"].map((s, i) => (
-                <a key={i} href="#"
-                  className="w-8 h-8 rounded-lg glass flex items-center justify-center text-white/40 hover:text-white/70 text-sm transition-colors">
-                  {s}
-                </a>
-              ))}
-            </div>
           </div>
 
-          {Object.entries(links).map(([group, items]) => (
-            <div key={group}>
-              <h4 className="text-white font-semibold text-sm mb-4">{group}</h4>
-              <ul className="space-y-2.5">
-                {items.map((item) => (
-                  <li key={item}>
-                    <a href="#" className="text-white/35 text-sm hover:text-white/65 transition-colors">{item}</a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+          {/* Right — nav columns */}
+          <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10">
+            {columns.map((col) => (
+              <div key={col.heading}>
+                <h4 className="text-[14px] font-semibold text-gray-900 mb-5">
+                  {col.heading}
+                </h4>
+                <ul className="space-y-3.5">
+                  {col.links.map((link) => (
+                    <li key={link}>
+                      <a
+                        href="#"
+                        className="text-[14px] text-gray-400 hover:text-gray-700 transition-colors leading-snug block"
+                      >
+                        {link}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
         </div>
 
-        <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/25 text-sm">© 2024 Sintra AI. All rights reserved.</p>
-          <div className="flex items-center gap-2">
-            <div className="w-2 h-2 rounded-full bg-green-400 pulse-glow" />
-            <span className="text-white/25 text-sm">All systems operational</span>
+        {/* Trustpilot */}
+        <div className="mt-16">
+          <div className="flex items-center gap-2 mb-2">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#00b67a">
+              <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
+            </svg>
+            <span className="text-[15px] font-semibold text-gray-800">Trustpilot</span>
           </div>
+          <div className="flex items-center gap-1 mb-2">
+            {[1,2,3,4].map((i) => (
+              <div key={i} className="w-9 h-9 bg-[#00b67a] flex items-center justify-center">
+                <Star size={18} fill="white" className="text-white" />
+              </div>
+            ))}
+            <div className="w-9 h-9 bg-gray-200 flex items-center justify-center relative overflow-hidden">
+              <div className="absolute inset-0 bg-[#00b67a]" style={{ width: "50%" }} />
+              <Star size={18} fill="white" className="text-white relative z-10" />
+            </div>
+          </div>
+          <p className="text-[13px] text-gray-500">
+            TrustScore <strong className="text-gray-800">4.5</strong>
+            {" | "}
+            <a href="#" className="underline text-gray-800 font-medium">8,331 reviews</a>
+          </p>
         </div>
+
       </div>
     </footer>
   );
