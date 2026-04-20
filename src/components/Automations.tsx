@@ -153,7 +153,7 @@ export default function Automations() {
           {/* Image — right half, fills the column */}
           <div style={{ position: "relative", overflow: "hidden" }} className="pt-16 px-4 ">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie.avif" loading="lazy" sizes="100vw" srcset="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie-p-500.avif 500w, https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie.avif 830w" alt="" class="home-automations_card-image" />
+            <img src="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie.avif" loading="lazy" sizes="100vw" srcSet="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie-p-500.avif 500w, https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie.avif 830w" alt="" className="home-automations_card-image" />
           </div>
         </div>
 
