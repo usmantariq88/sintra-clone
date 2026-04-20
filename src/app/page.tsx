@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import CharacterReveal from "@/components/CharacterReveal";
 import Automations from "@/components/Automations";
 import Present from "@/components/Present";
+import HelperCarousel from "@/components/HelperCarousel";
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
         <CharacterReveal />
         <Automations />
         <Present />
+        <HelperCarousel />
         <Workspaces />
         <Reviews />
         <CTA />
