@@ -54,8 +54,8 @@ export default function Workspaces() {
           <div
             className="ws-spacer hidden md:block"
             style={{
-              height: "682px",
-              maxHeight: "800px",
+              height: "460px",
+              maxHeight: "600px",
             }}
           />
 
@@ -179,8 +179,31 @@ export default function Workspaces() {
           style={{
             position: "absolute",
             inset: 0,
+            zIndex: 2,
             background:
               "linear-gradient(to right, #000 0%, #000 22%, rgba(0,0,0,0.85) 36%, rgba(0,0,0,0.2) 55%, transparent 68%)",
+          }}
+        />
+
+        {/* Right-side shadow over hand/keyboard area */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 2,
+            background:
+              "linear-gradient(to left, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.45) 12%, rgba(0,0,0,0.15) 28%, transparent 48%)",
+          }}
+        />
+
+        {/* Bottom shadow */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            zIndex: 2,
+            background:
+              "linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 15%, rgba(0,0,0,0.05) 30%, transparent 45%)",
           }}
         />
       </div>
@@ -197,7 +220,7 @@ export default function Workspaces() {
             padding-bottom: clamp(64px, 8.89vw, 128px) !important;
           }
           .ws-spacer {
-            height: clamp(300px, 47.4vw, 682px) !important;
+            height: clamp(200px, 32vw, 460px) !important;
           }
           .ws-heading {
             font-size: clamp(36px, 4.44vw, 64px) !important;
