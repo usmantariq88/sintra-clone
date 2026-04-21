@@ -52,7 +52,7 @@ export default function Workspaces() {
         >
           {/* home-workspaces_spacer: height 682px, max-height 800px */}
           <div
-            className="ws-spacer"
+            className="ws-spacer hidden md:block"
             style={{
               height: "682px",
               maxHeight: "800px",
