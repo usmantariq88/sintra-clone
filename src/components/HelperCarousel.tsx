@@ -99,6 +99,9 @@ interface Dims {
   arrowInset: number;
   arrowSize: number;
   overlayW: number;
+  overlayGradL: string;
+  overlayGradR: string;
+  containerW: string;
   visibleCount: number;
   nameFontSize: string;
   descFontSize: string;
@@ -107,17 +110,26 @@ interface Dims {
 function calcDims(vw: number): Dims {
   if (vw < 900) {
     const isPhone = vw < 640;
-    const cardW = Math.min(560, vw - 56);
+    const containerFraction = isPhone ? 0.95 : 0.90;
+    const containerPx = Math.round(vw * containerFraction);
+    const cardW = isPhone ? Math.min(560, containerPx - 32) : Math.min(560, vw - 56);
     const gap = isPhone ? 16 : 20;
-    const sideGutter = Math.round((vw - cardW) / 2);
+    const sideGutter = Math.round((containerPx - cardW) / 2);
     return {
       cardW,
       videoH: Math.round(cardW * 1.765),
       gap,
       leftPad: sideGutter,
-      arrowInset: isPhone ? 8 : 16,
-      arrowSize: isPhone ? 2.875 : 3.25,
-      overlayW: isPhone ? Math.max(30, sideGutter + 8) : 76,
+      arrowInset: isPhone ? 6 : 16,
+      arrowSize: isPhone ? 2.1 : 3.25,
+      overlayW: isPhone ? Math.max(20, sideGutter + 4) : 76,
+      overlayGradL: isPhone
+        ? "linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)"
+        : "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
+      overlayGradR: isPhone
+        ? "linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)"
+        : "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
+      containerW: isPhone ? "95%" : "90%",
       visibleCount: 1,
       nameFontSize: isPhone ? "1.25rem" : "1.875rem",
       descFontSize: isPhone ? "0.9375rem" : "1.0625rem",
@@ -134,6 +146,9 @@ function calcDims(vw: number): Dims {
       arrowInset: 16,
       arrowSize: 3.25,
       overlayW: 120,
+      overlayGradL: "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
+      overlayGradR: "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
+      containerW: "90%",
       visibleCount: 2,
       nameFontSize: "1.5rem",
       descFontSize: "1rem",
@@ -149,6 +164,9 @@ function calcDims(vw: number): Dims {
     arrowInset: 24,
     arrowSize: 3.5,
     overlayW: 160,
+    overlayGradL: "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
+    overlayGradR: "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
+    containerW: "90%",
     visibleCount: 3,
     nameFontSize: "1.875rem",
     descFontSize: "1.0625rem",
@@ -221,8 +239,8 @@ export default function HelperCarousel() {
   return (
     <section style={{ background: "#000", padding: "8rem 0" }}>
       {/* Full-width carousel track with overflow clip */}
-      <div
-        style={{ position: "relative", overflow: "hidden", width: "100%" }}
+      <div className="mx-auto"
+        style={{ position: "relative", overflow: "hidden", width: dims.containerW }}
         onTouchStart={e => {
           touchX.current = e.touches[0].clientX;
           touchY.current = e.touches[0].clientY;
@@ -245,7 +263,7 @@ export default function HelperCarousel() {
             top: 0,
             bottom: 0,
             width: `${dims.overlayW}px`,
-            background: "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
+            background: dims.overlayGradL,
             zIndex: 15,
             pointerEvents: "none",
           }}
@@ -260,7 +278,7 @@ export default function HelperCarousel() {
             top: 0,
             bottom: 0,
             width: `${dims.overlayW}px`,
-            background: "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
+            background: dims.overlayGradR,
             zIndex: 15,
             pointerEvents: "none",
           }}
@@ -329,6 +347,8 @@ export default function HelperCarousel() {
                 <div
                   style={{
                     paddingTop: "1.5rem",
+                    paddingLeft: "1rem",
+                    paddingRight: "1rem",
                   }}
                 >
                   <a href={h.href} style={{ textDecoration: "none", display: "inline-block", marginBottom: "0.5rem" }}>
@@ -344,6 +364,7 @@ export default function HelperCarousel() {
                         WebkitFontSmoothing: "antialiased",
                         textRendering: "optimizeLegibility",
                       }}
+                      className="xl:mb-4"
                     >
                       {h.name}
                     </h2>

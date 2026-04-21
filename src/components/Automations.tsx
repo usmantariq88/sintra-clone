@@ -37,8 +37,11 @@ export default function Automations() {
           src="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/673f7efdd574ab7ce78808c6_automations-helpers-cover.avif"
           alt=""
           style={{
+            position: "absolute",
+            top: "-18%",
+            left: 0,
             width: "100%",
-            height: "100%",
+            height: "110%",
             objectFit: "cover",
             objectPosition: "50% 50%",
             display: "block",
@@ -57,7 +60,7 @@ export default function Automations() {
 
       {/* ── Content — sits on top, its height drives the section height ── */}
       <div
-        className="automations-copy xl:!mt-[230px]"
+        className="automations-copy xl:!mt-[110px]"
         style={{
           position: "relative",
           zIndex: 2,
@@ -169,7 +172,7 @@ export default function Automations() {
         >
           {/* Text — left half, vertically centred */}
           <div
-            className="automations-card-content"
+            className="automations-card-content xl:mt-[45px]"
             style={{
               padding: "56px 48px",
               display: "flex",
@@ -199,7 +202,7 @@ export default function Automations() {
               style={{
                 width: "415px",
                 margin: 0,
-                color: "rgb(255, 255, 255)",
+                color: "rgba(255, 255, 255, 0.67)",
                 fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
                 fontFeatureSettings: '"salt"',
                 fontSize: "20px",
@@ -221,7 +224,7 @@ export default function Automations() {
             style={{
               width: "511px",
               height: "584.242px",
-              paddingTop: "64px",
+              paddingTop: "25px",
               paddingLeft: "32px",
               paddingRight: "32px",
               boxSizing: "border-box",
@@ -325,7 +328,7 @@ export default function Automations() {
             style={{
               width: "486px",
               height: "415.992px",
-              paddingTop: "64px",
+              paddingTop: "25px",
               paddingLeft: "32px",
               paddingRight: "32px",
               boxSizing: "border-box",

@@ -211,7 +211,7 @@ body::-webkit-scrollbar {
 */
 @media (max-width: 639px) {
   .hero-video {
-    object-position: center 62%;
+    object-position: 40% 32%;
   }
 }
 @media (min-width: 640px) and (max-width: 1023px) {
@@ -407,26 +407,14 @@ body::-webkit-scrollbar {
 
   .automations-card,
   .automations-card-wide {
-    width: 359px !important;
-    max-width: 359px !important;
+    width: min(359px, 100%) !important;
+    max-width: min(359px, 100%) !important;
     height: auto !important;
     justify-self: center !important;
     grid-template-columns: 1fr !important;
-    grid-template-rows: auto 1fr !important;
+    grid-template-rows: auto auto !important;
     row-gap: 0 !important;
     border-radius: 16px !important;
-  }
-
-  .automations-card-wide {
-    min-height: 604px !important;
-  }
-
-  .automations-card-blue {
-    min-height: 582px !important;
-  }
-
-  .automations-card-yellow {
-    min-height: 533px !important;
   }
 
   .automations-card-content {
@@ -448,7 +436,6 @@ body::-webkit-scrollbar {
   .automations-card-media {
     width: 100% !important;
     height: auto !important;
-    min-height: 260px !important;
     padding-top: 8px !important;
     padding-left: 18px !important;
     padding-right: 18px !important;
