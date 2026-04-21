@@ -6,9 +6,10 @@ import type { DotLottie } from "@lottiefiles/dotlottie-react";
 
 // Lottie canvas native dimensions — 3840×2650 landscape (aspect = 1.4491…)
 const ASPECT = 3840 / 2650;
+const MOBILE_BP = 768;
 
 export default function CharacterReveal() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [dotLottie, setDotLottie] = useState<DotLottie | null>(null);
   const [totalFrames, setTotalFrames] = useState(0);
 
@@ -29,22 +30,35 @@ export default function CharacterReveal() {
   */
   const [wrapW, setWrapW] = useState<string>("100vw");
   const [wrapH, setWrapH] = useState<string | undefined>(undefined);
+  const [sectionH, setSectionH] = useState<string>("150vh");
 
   useEffect(() => {
     const calc = () => {
-      if (window.innerWidth <= 768) {
-        const vh = window.innerHeight;
+      const viewportH = window.visualViewport?.height ?? window.innerHeight;
+
+      if (window.innerWidth <= MOBILE_BP) {
+        const vh = Math.round(viewportH);
         const vw = Math.ceil(vh * ASPECT);
         setWrapW(`${vw}px`);
         setWrapH(`${vh}px`);
+        // Slightly longer runway on phones so the animation has enough scroll distance.
+        setSectionH(`${Math.round(vh * 1.75)}px`);
       } else {
         setWrapW("100vw");
         setWrapH(undefined);
+        setSectionH("150vh");
       }
     };
+
     calc();
     window.addEventListener("resize", calc);
-    return () => window.removeEventListener("resize", calc);
+    window.addEventListener("orientationchange", calc);
+    window.visualViewport?.addEventListener("resize", calc);
+    return () => {
+      window.removeEventListener("resize", calc);
+      window.removeEventListener("orientationchange", calc);
+      window.visualViewport?.removeEventListener("resize", calc);
+    };
   }, []);
 
   // ── Lottie load ────────────────────────────────────────────────────────────
@@ -53,7 +67,8 @@ export default function CharacterReveal() {
     const onLoad = () => {
       setTotalFrames(dotLottie.totalFrames);
       dotLottie.pause();
-      dotLottie.setFrame(0);
+      // Frame 0 can be visually empty in this asset on some devices.
+      dotLottie.setFrame(1);
     };
     dotLottie.addEventListener("load", onLoad);
     return () => dotLottie.removeEventListener("load", onLoad);
@@ -86,7 +101,9 @@ export default function CharacterReveal() {
         Math.max((window.innerHeight - rect.top) / (section.offsetHeight * 0.82), 0),
         1
       );
-      targetFrameRef.current = progress * (totalFrames - 1);
+      // Start slightly into the timeline so the character is visible immediately.
+      const startFrame = Math.floor(totalFrames * 0.06);
+      targetFrameRef.current = startFrame + progress * Math.max(totalFrames - 1 - startFrame, 1);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -100,12 +117,12 @@ export default function CharacterReveal() {
   return (
     <>
       {/* 150vh = scroll runway; sticky child locks to viewport while parent scrolls */}
-      <section ref={sectionRef} style={{ height: "150vh", background: "#000" }}>
+      <section ref={sectionRef} style={{ height: sectionH, background: "#000" }}>
         <div
           style={{
             position: "sticky",
             top: 0,
-            height: "100vh",
+            height: wrapH ?? "100dvh",
             overflow: "hidden",
             background: "#000",
           }}
@@ -153,6 +170,7 @@ export default function CharacterReveal() {
                 // has no intrinsic auto height and will render at 0 without it.
                 height: wrapH ?? "auto",
                 display: "block",
+                pointerEvents: "none",
               }}
             />
           </div>

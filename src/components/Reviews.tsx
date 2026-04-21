@@ -43,6 +43,12 @@ const reviews = [
 
 const FF = '"GT Walsheim Pro", Arial, sans-serif';
 
+const floaterAvatars = [
+  "https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/670b5d3882af649433af33f3_mister-4.avif",
+  "https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/670b5ccb5c11f13918a3ddb5_mister-3.webp",
+  "https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/670b5cccafc8dc06f64c24bb_mister-2.webp",
+];
+
 function Stars() {
   return (
     <div style={{ display: "flex", alignItems: "center", height: "24px" }}>
@@ -321,31 +327,31 @@ export default function Reviews() {
               >
                 {/* Overlapping avatar circles */}
                 <div className="rv-toggle-avatars" style={{ display: "flex", alignItems: "center" }}>
-                  {[
-                    { bg: "#c2410c", label: "C" },
-                    { bg: "#7c3aed", label: "B" },
-                    { bg: "#0369a1", label: "J" },
-                  ].map((a, i) => (
+                  {floaterAvatars.map((src, i) => (
                     <div
                       key={i}
                       style={{
                         width: "32px",
                         height: "32px",
                         borderRadius: "50%",
-                        background: a.bg,
                         border: "2px solid #000",
                         marginLeft: i === 0 ? 0 : "-8px",
+                        overflow: "hidden",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        fontSize: "11px",
-                        fontWeight: 700,
-                        color: "#fff",
                         zIndex: 3 - i,
                         position: "relative",
                       }}
                     >
-                      {a.label}
+                      <img
+                        src={src}
+                        alt=""
+                        loading="lazy"
+                        width={32}
+                        height={32}
+                        style={{ width: "32px", height: "32px", objectFit: "cover", display: "block" }}
+                      />
                     </div>
                   ))}
                 </div>
@@ -369,7 +375,7 @@ export default function Reviews() {
                       marginRight: "8px",
                     }}
                   />
-                  <span className="rv-toggle-action-text" style={{ fontSize: "17px", fontWeight: 400, opacity: 0.7 }}>
+                  <span className="rv-toggle-action-text" style={{ fontSize: "17px", fontWeight: 400 }}>
                     View more
                   </span>
                   <div
@@ -378,16 +384,17 @@ export default function Reviews() {
                       width: "32px",
                       height: "32px",
                       borderRadius: "50%",
-                      background: "rgba(255,255,255,0.15)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: "18px",
+                      color: "rgba(255,255,255,0.92)",
                       fontWeight: 400,
                       lineHeight: 1,
                     }}
                   >
-                    +
+                    <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" preserveAspectRatio="xMidYMid meet" aria-hidden="true" role="img">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M12 1C5.92487 1 1 5.92487 1 12C1 18.0751 5.92487 23 12 23C18.0751 23 23 18.0751 23 12C23 5.92487 18.0751 1 12 1ZM12 7C12.5523 7 13 7.44772 13 8V11H16C16.5523 11 17 11.4477 17 12C17 12.5523 16.5523 13 16 13H13V16C13 16.5523 12.5523 17 12 17C11.4477 17 11 16.5523 11 16V13H8C7.44772 13 7 12.5523 7 12C7 11.4477 7.44772 11 8 11H11V8C11 7.44772 11.4477 7 12 7Z" fill="currentColor" />
+                    </svg>
                   </div>
                 </div>
               </button>
@@ -433,31 +440,31 @@ export default function Reviews() {
                 }}
               >
                 <div className="rv-toggle-avatars" style={{ display: "flex", alignItems: "center" }}>
-                  {[
-                    { bg: "#c2410c", label: "C" },
-                    { bg: "#7c3aed", label: "B" },
-                    { bg: "#0369a1", label: "J" },
-                  ].map((a, i) => (
+                  {floaterAvatars.map((src, i) => (
                     <div
                       key={i}
                       style={{
                         width: "32px",
                         height: "32px",
                         borderRadius: "50%",
-                        background: a.bg,
                         border: "2px solid #000",
                         marginLeft: i === 0 ? 0 : "-8px",
+                        overflow: "hidden",
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                        fontSize: "11px",
-                        fontWeight: 700,
-                        color: "#fff",
                         zIndex: 3 - i,
                         position: "relative",
                       }}
                     >
-                      {a.label}
+                      <img
+                        src={src}
+                        alt=""
+                        loading="lazy"
+                        width={32}
+                        height={32}
+                        style={{ width: "32px", height: "32px", objectFit: "cover", display: "block" }}
+                      />
                     </div>
                   ))}
                 </div>
@@ -488,16 +495,17 @@ export default function Reviews() {
                       width: "32px",
                       height: "32px",
                       borderRadius: "50%",
-                      background: "rgba(255,255,255,0.15)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
-                      fontSize: "22px",
+                      color: "#ffffff",
                       fontWeight: 400,
                       lineHeight: 1,
                     }}
                   >
-                    −
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 33 33" fill="none" width="100%" height="100%" aria-hidden="true" role="img">
+                      <path d="M11.051 16.6852H21.5773M29.472 16.6852C29.472 23.9521 23.581 29.8431 16.3141 29.8431C9.04724 29.8431 3.15625 23.9521 3.15625 16.6852C3.15625 9.41833 9.04724 3.52734 16.3141 3.52734C23.581 3.52734 29.472 9.41833 29.472 16.6852Z" stroke="#171717" fill="#ffffff" strokeWidth="2.63158" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
                   </div>
                 </div>
               </button>
