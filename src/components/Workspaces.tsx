@@ -91,7 +91,8 @@ export default function Workspaces() {
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 1fr",
-                gap: "0",
+                columnGap: "50px",
+                rowGap: "32px",
               }}
             >
               {features.map((f) => (
@@ -111,8 +112,8 @@ export default function Workspaces() {
                     {f.title}
                   </p>
 
-                  {/* Gap sub-heading → para: 16px */}
-                  <div style={{ height: "16px" }} />
+                  {/* Gap sub-heading → para: 32px */}
+                  <div style={{ height: "32px" }} />
 
                   {/* Description: 19px / 400 / 26.6px / -0.475px / opacity 0.6 */}
                   <p

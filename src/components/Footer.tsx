@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { Star } from "lucide-react";
 
 const columns = [
   {
@@ -33,82 +32,265 @@ const columns = [
 
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-100">
-      <div className="max-w-[1440px] mx-auto px-[7%] py-20">
-
-        {/* Main row */}
-        <div className="flex flex-col lg:flex-row gap-16">
-
-          {/* Left — logo + copyright */}
-          <div className="flex-shrink-0 w-56">
-            <a href="#" className="inline-block mb-6">
-              <Image
-                src="/logoBlue.svg"
-                alt="Sintra"
-                width={110}
-                height={34}
-                priority
-              />
-            </a>
-            <p className="text-[14px] text-gray-400 leading-[1.7]">
-              Copyright © 2026<br />
-              PlayOS, Inc.<br />
-              All rights reserved
-            </p>
-          </div>
-
-          {/* Right — nav columns */}
-          <div className="flex-1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-10">
-            {columns.map((col) => (
-              <div key={col.heading}>
-                <h4 className="text-[14px] font-semibold text-gray-900 mb-5">
-                  {col.heading}
-                </h4>
-                <ul className="space-y-3.5">
-                  {col.links.map((link) => (
-                    <li key={link}>
-                      <a
-                        href="#"
-                        className="text-[14px] text-gray-400 hover:text-gray-700 transition-colors leading-snug block"
-                      >
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+    <footer className="ft-root">
+      <div className="ft-shell">
+        <div className="ft-inner">
+          <div className="ft-content">
+            <div className="ft-menu">
+              <div className="ft-brand-block">
+                <a href="#" className="ft-logo-link" aria-label="Sintra home">
+                  <Image src="/logoBlue.svg" alt="Sintra" width={131} height={40} priority />
+                </a>
+                <p className="ft-copyright">
+                  Copyright © 2026
+                  <br />
+                  PlayOS, Inc.
+                  <br />
+                  All rights reserved
+                </p>
               </div>
-            ))}
-          </div>
 
-        </div>
-
-        {/* Trustpilot */}
-        <div className="mt-16">
-          <div className="flex items-center gap-2 mb-2">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="#00b67a">
-              <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
-            </svg>
-            <span className="text-[15px] font-semibold text-gray-800">Trustpilot</span>
-          </div>
-          <div className="flex items-center gap-1 mb-2">
-            {[1,2,3,4].map((i) => (
-              <div key={i} className="w-9 h-9 bg-[#00b67a] flex items-center justify-center">
-                <Star size={18} fill="white" className="text-white" />
+              <div className="ft-links-grid">
+                {columns.map((col) => (
+                  <div key={col.heading} className="ft-col">
+                    <h4 className="ft-col-title">{col.heading}</h4>
+                    <ul className="ft-col-list">
+                      {col.links.map((link) => (
+                        <li key={link}>
+                          <a href="#" className="ft-link">
+                            {link}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
               </div>
-            ))}
-            <div className="w-9 h-9 bg-gray-200 flex items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-[#00b67a]" style={{ width: "50%" }} />
-              <Star size={18} fill="white" className="text-white relative z-10" />
+            </div>
+
+            <div className="ft-trust">
+              <div className="trustpilot-light">
+                <div
+                  className="trustpilot-widget"
+                  data-locale="en-US"
+                  data-template-id="53aa8807dec7e10d38f59f32"
+                  data-businessunit-id="64d265adc76b8b730c104b17"
+                  data-style-height="150px"
+                  data-style-width="100%"
+                  data-token="a434805a-be13-477a-a809-ef8e80cc186a"
+                  style={{ position: "relative", width: "100%", maxWidth: "280px" }}
+                >
+                  <iframe
+                    title="Customer reviews powered by Trustpilot"
+                    loading="lazy"
+                    style={{
+                      position: "relative",
+                      height: "150px",
+                      width: "100%",
+                      borderStyle: "none",
+                      display: "block",
+                      overflow: "hidden",
+                    }}
+                    src="https://widget.trustpilot.com/trustboxes/53aa8807dec7e10d38f59f32/index.html?templateId=53aa8807dec7e10d38f59f32&businessunitId=64d265adc76b8b730c104b17#locale=en-US&styleHeight=150px&styleWidth=100%25&token=a434805a-be13-477a-a809-ef8e80cc186a"
+                  />
+                </div>
+              </div>
             </div>
           </div>
-          <p className="text-[13px] text-gray-500">
-            TrustScore <strong className="text-gray-800">4.5</strong>
-            {" | "}
-            <a href="#" className="underline text-gray-800 font-medium">8,331 reviews</a>
-          </p>
         </div>
-
       </div>
+
+      <style>{`
+        .ft-root {
+          background-color: rgb(255, 255, 255);
+          box-sizing: border-box;
+          color: rgb(23, 23, 23);
+          display: block;
+          font-family: "GT Walsheim Pro", Arial, sans-serif;
+          font-feature-settings: "salt";
+          font-size: 17px;
+          font-weight: 400;
+          line-height: 25.5px;
+          text-rendering: optimizeLegibility;
+          -webkit-font-smoothing: antialiased;
+        }
+
+        .ft-shell {
+          box-sizing: border-box;
+          color: rgb(23, 23, 23);
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          max-width: 1280px;
+          width: 100%;
+        }
+
+        .ft-inner {
+          box-sizing: border-box;
+          color: rgb(23, 23, 23);
+          display: block;
+          width: 100%;
+          padding-top: 128px;
+          padding-bottom: 128px;
+        }
+
+        .ft-content {
+          box-sizing: border-box;
+          color: rgb(23, 23, 23);
+          display: block;
+          width: 100%;
+        }
+
+        .ft-menu {
+          align-items: flex-start;
+          box-sizing: border-box;
+          color: rgb(23, 23, 23);
+          column-gap: 96px;
+          display: flex;
+          justify-content: space-between;
+          row-gap: 96px;
+          width: 100%;
+          min-height: 276px;
+        }
+
+        .ft-brand-block {
+          width: 210px;
+          flex: 0 0 210px;
+        }
+
+        .ft-logo-link {
+          display: inline-block;
+          margin-bottom: 22px;
+          line-height: 0;
+        }
+
+        .ft-copyright {
+          margin: 0;
+          color: rgba(23, 23, 23, 0.5);
+          font-size: 32px;
+          font-weight: 400;
+          line-height: 46px;
+          letter-spacing: -0.64px;
+        }
+
+        .ft-links-grid {
+          display: grid;
+          grid-template-columns: repeat(5, minmax(100px, 1fr));
+          column-gap: 48px;
+          width: 100%;
+        }
+
+        .ft-col-title {
+          margin: 0 0 18px;
+          color: rgb(23, 23, 23);
+          font-size: 32px;
+          font-weight: 500;
+          line-height: 46px;
+          letter-spacing: -0.64px;
+        }
+
+        .ft-col-list {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .ft-link {
+          color: rgba(23, 23, 23, 0.5);
+          text-decoration: none;
+          font-size: 32px;
+          font-weight: 400;
+          line-height: 46px;
+          letter-spacing: -0.64px;
+          transition: color 0.2s ease;
+        }
+
+        .ft-link:hover {
+          color: rgba(23, 23, 23, 0.75);
+        }
+
+        .ft-trust {
+          align-items: center;
+          box-sizing: border-box;
+          color: rgb(23, 23, 23);
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          min-height: 150px;
+          margin-top: 64px;
+        }
+
+        @media (max-width: 1439px) {
+          .ft-shell {
+            max-width: 1280px;
+            padding-left: clamp(20px, 5vw, 72px);
+            padding-right: clamp(20px, 5vw, 72px);
+          }
+
+          .ft-inner {
+            padding-top: clamp(64px, 8.89vw, 128px);
+            padding-bottom: clamp(64px, 8.89vw, 128px);
+          }
+
+          .ft-menu {
+            column-gap: clamp(28px, 4vw, 96px);
+            row-gap: clamp(40px, 5vw, 96px);
+          }
+
+          .ft-copyright,
+          .ft-col-title,
+          .ft-link {
+            font-size: clamp(16px, 1.18vw, 17px);
+            line-height: clamp(24px, 1.77vw, 25.5px);
+            letter-spacing: clamp(-0.34px, -0.02vw, -0.25px);
+          }
+        }
+
+        @media (max-width: 1023px) {
+          .ft-menu {
+            flex-direction: column;
+          }
+
+          .ft-brand-block {
+            width: 100%;
+            flex: 0 0 auto;
+          }
+
+          .ft-links-grid {
+            grid-template-columns: repeat(3, minmax(120px, 1fr));
+            row-gap: 26px;
+          }
+        }
+
+        @media (max-width: 767px) {
+          .ft-shell {
+            padding-left: 20px;
+            padding-right: 20px;
+          }
+
+          .ft-inner {
+            padding-top: 48px;
+            padding-bottom: 48px;
+          }
+
+          .ft-links-grid {
+            grid-template-columns: repeat(2, minmax(120px, 1fr));
+          }
+
+          .ft-trust {
+            margin-top: 40px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .ft-links-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
     </footer>
   );
 }
