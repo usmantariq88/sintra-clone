@@ -195,7 +195,7 @@ const extendedHelpers = [
 
 export default function HelperCarousel() {
   // idx is position in extendedHelpers; real items start at CLONE_COUNT
-  const [idx, setIdx] = useState(CLONE_COUNT);
+  const [idx, setIdx] = useState(CLONE_COUNT + 11);
   const [isAnimated, setIsAnimated] = useState(true);
   const [dims, setDims] = useState<Dims>(() =>
     calcDims(typeof window !== "undefined" ? window.innerWidth : 1280)
@@ -242,9 +242,7 @@ export default function HelperCarousel() {
     }
   }, [isAnimated]);
 
-  // active is 0-based position in real HELPERS array
-  const active = idx - CLONE_COUNT;
-  const tx = dims.leftPad - active * (dims.cardW + dims.gap);
+  const tx = dims.leftPad - idx * (dims.cardW + dims.gap);
 
   const arrowBase: React.CSSProperties = {
     position: "absolute",
@@ -400,8 +398,8 @@ export default function HelperCarousel() {
                   </a>
 
                   <p
+                    className="text-base"
                     style={{
-                      fontSize: dims.descFontSize,
                       fontWeight: 400,
                       lineHeight: 1.5,
                       color: "#a3a3a3",
@@ -409,10 +407,6 @@ export default function HelperCarousel() {
                       fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
                       WebkitFontSmoothing: "antialiased",
                       textRendering: "optimizeLegibility",
-                      display: "-webkit-box",
-                      WebkitLineClamp: 5,
-                      WebkitBoxOrient: "vertical" as const,
-                      overflow: "hidden",
                     }}
                   >
                     {h.desc}

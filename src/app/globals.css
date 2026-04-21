@@ -260,8 +260,8 @@ body::-webkit-scrollbar {
   }
 
   .automations-grid {
-    width: 100% !important;
-    max-width: 100% !important;
+    /* width: 100% !important;
+    max-width: 100% !important; */
     height: auto !important;
     padding-top: clamp(44px, 5vw, 60px) !important;
     padding-bottom: clamp(72px, 7vw, 96px) !important;
@@ -355,8 +355,8 @@ body::-webkit-scrollbar {
   }
 
   .automations-grid {
-    width: 100% !important;
-    max-width: 100% !important;
+    /* width: 100% !important;
+    max-width: 100% !important; */
     height: auto !important;
     grid-template-columns: 1fr !important;
     grid-template-rows: auto !important;
