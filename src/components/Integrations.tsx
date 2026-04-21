@@ -35,143 +35,166 @@ const logos = [
 
 export default function Integrations() {
   return (
-    /* section_home-integrations background-color-alternate
-       Computed: width 1440px, height 1040.91px */
     <section
       style={{
         background: "#000",
-        color: "#fff",
+        color: "rgb(255, 255, 255)",
         fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+        fontFeatureSettings: '"salt"',
+        fontSize: "17px",
+        fontWeight: 400,
+        lineHeight: "25.5px",
         WebkitFontSmoothing: "antialiased",
         textRendering: "optimizeLegibility",
-        overflow: "hidden",
       }}
     >
-      {/* padding-global: 72px horizontal */}
+      {/* padding-global: 72px h-padding, position relative, z-index 1 */}
       <div
+        className="int-pad"
         style={{
-          paddingLeft: "clamp(20px, 5vw, 72px)",
-          paddingRight: "clamp(20px, 5vw, 72px)",
+          paddingLeft: "72px",
+          paddingRight: "72px",
           position: "relative",
           zIndex: 1,
         }}
       >
-        {/* container-large  padding-section-large: 128px top/bottom
-            Inner width: 1440 - 72*2 = 1296px */}
+        {/* container-large: max-width 1280px, margin 0 auto (=0 8px at 1440px),
+            padding-section-large: 128px top/bottom */}
         <div
+          className="int-wrap"
           style={{
-            paddingTop: "clamp(64px, 8.9vw, 128px)",
-            paddingBottom: "clamp(64px, 8.9vw, 128px)",
+            maxWidth: "1280px",
+            margin: "0 auto",
+            paddingTop: "128px",
+            paddingBottom: "128px",
           }}
         >
-          {/* home-integrations_grid
-              grid-template-columns: 600px 600px, column-gap: 96px
-              grid-template-rows: 784.914px (single row, fixed height)
-              Total: 600+96+600 = 1296px matches container */}
+          {/* home-integrations_grid:
+              grid-template-columns: 592px 592px
+              column-gap: 96px  (592+96+592=1280 ✓)
+              grid-template-rows: 784.914px (driven by image div height) */}
           <div
+            className="int-grid"
             style={{
               display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              columnGap: "clamp(24px, 6.67vw, 96px)",
-              /* Fixed row height matching original computed 784.914px */
-              gridTemplateRows: "clamp(400px, 54.5vw, 784px)",
-              alignItems: "end",
+              gridAutoColumns: "1fr",
+              gridTemplateColumns: "592px 592px",
+              columnGap: "96px",
+              rowGap: "96px",
             }}
           >
-            {/* ── Left: home-integrations_content (align-self: end) ── */}
+
+            {/* ── Left: home-integrations_content (align-self: end) ──────── */}
             <div
+              className="int-left"
               style={{
                 alignSelf: "end",
                 display: "flex",
                 flexDirection: "column",
               }}
             >
-              {/* margin-bottom margin-medium: 32px */}
-              <div style={{ marginBottom: "32px" }}>
-                <h2
-                  style={{
-                    fontSize: "clamp(36px, 4.44vw, 64px)",
-                    fontWeight: 500,
-                    color: "#fff",
-                    lineHeight: 1.0,
-                    letterSpacing: "-0.03em",
-                    margin: 0,
-                    fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
-                    WebkitFontSmoothing: "antialiased",
-                  }}
-                >
-                  Integrates with your favorite tools.
-                </h2>
-              </div>
-
-              {/* margin-bottom margin-large: 48px */}
-              <div style={{ marginBottom: "48px" }}>
-                <p
-                  style={{
-                    fontSize: "clamp(14px, 1.18vw, 17px)",
-                    fontWeight: 400,
-                    color: "rgba(255,255,255,0.6)",
-                    lineHeight: "1.5",
-                    margin: 0,
-                    fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
-                    WebkitFontSmoothing: "antialiased",
-                  }}
-                >
-                  Your AI employees don&apos;t live in a silo. They work directly inside the tools
-                  your business already relies on - from email and calendars to social platforms,
-                  CRMs, to personal apps. By connecting your existing stack, Sintra gives your
-                  digital staff the context they need to follow your workflows, act at the right
-                  moment, and keep work moving without manual handoffs. No new processes to learn.
-                  No disruption. Just smarter execution across your tools.
-                </p>
-              </div>
-
-              {/* home-integrations_icons-wrapper
-                  flex-wrap, column-gap 32, row-gap 32, max-width 400px */}
-              <div
+              {/* Heading: font-size 64px, font-weight 500, line-height 64px,
+                  letter-spacing -1.92px, height 128px (2 lines × 64px) */}
+              <h2
+                className="int-heading"
                 style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  flexWrap: "wrap",
-                  alignItems: "center",
-                  justifyContent: "flex-start",
-                  columnGap: "clamp(16px, 2.22vw, 32px)",
-                  rowGap: "clamp(16px, 2.22vw, 32px)",
-                  maxWidth: "400px",
+                  fontSize: "64px",
+                  fontWeight: 500,
+                  color: "rgb(255, 255, 255)",
+                  lineHeight: "64px",
+                  letterSpacing: "-1.92px",
+                  margin: 0,
+                  fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+                  fontFeatureSettings: '"salt"',
+                  WebkitFontSmoothing: "antialiased",
+                  textRendering: "optimizeLegibility",
                 }}
               >
-                {logos.map((logo) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={logo.alt}
-                    src={logo.src}
-                    alt={logo.alt}
-                    loading="lazy"
-                    style={{
-                      /* 4 cols × 64px + 3 gaps × 32px = 352px < 400px ✓
-                         Row height: (160 - 32) / 2 = 64px */
-                      width: "clamp(44px, 4.44vw, 64px)",
-                      height: "clamp(44px, 4.44vw, 64px)",
-                      objectFit: "contain",
-                      display: "block",
-                      flexShrink: 0,
-                    }}
-                  />
-                ))}
+                Integrates with your favorite tools.
+              </h2>
+
+              {/* Spacer heading → paragraph: 32px */}
+              <div className="int-spacer-hd" style={{ height: "32px" }} />
+
+              {/* Paragraph: font-size 20px, line-height 26.6px,
+                  letter-spacing -0.6px, full white, height ~186px
+                  128 + 32 + 186.156 + 48 + 160 + 64 = 618.156 ✓ */}
+              <p
+                className="int-para"
+                style={{
+                  fontSize: "20px",
+                  fontWeight: 400,
+                  color: "rgb(255, 255, 255)",
+                  lineHeight: "26.6px",
+                  letterSpacing: "-0.6px",
+                  margin: 0,
+                  fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+                  fontFeatureSettings: '"salt"',
+                  WebkitFontSmoothing: "antialiased",
+                  textRendering: "optimizeLegibility",
+                }}
+              >
+                Your AI employees don&apos;t live in a silo. They work directly inside the tools
+                your business already relies on - from email and calendars to social platforms,
+                CRMs, to personal apps. By connecting your existing stack, Sintra gives your
+                digital staff the context they need to follow your workflows, act at the right
+                moment, and keep work moving without manual handoffs. No new processes to learn.
+                No disruption. Just smarter execution across your tools.
+              </p>
+
+              {/* Icons grid — last: margin-top 48px (para→icons gap),
+                  margin-bottom 64px (space below within bottom-aligned block) */}
+              <div className="int-icons-mb" style={{ marginTop: "48px", marginBottom: "64px" }}>
+                <div
+                  className="int-icons-flex"
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                    alignItems: "center",
+                    columnGap: "32px",
+                    rowGap: "32px",
+                    /* 4 icons/row × 64px + 3 × 32px gap = 352px ≤ 400px
+                       2 rows × 64px + 1 × 32px row-gap = 160px height ✓ */
+                    maxWidth: "400px",
+                  }}
+                >
+                  {logos.map((logo) => (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      key={logo.alt}
+                      src={logo.src}
+                      alt={logo.alt}
+                      loading="lazy"
+                      className="int-icon"
+                      style={{
+                        width: "64px",
+                        height: "64px",
+                        objectFit: "contain",
+                        display: "block",
+                        flexShrink: 0,
+                      }}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* ── Right: home-integrations_visual (iPhone mockup) ──
-                Grid cell height is fixed via gridTemplateRows.
-                Image fills the cell height, width auto.
-                align-self: stretch → fills the full row height. */}
+            {/* ── Right: home-integrations_visual (iPhone mockup) ────────
+                align-self: end, justify-self: center
+                width: 480px, max-width: 480px
+                height: 784.914px (drives the grid row height)
+                overflow-x: clip, overflow-y: clip */}
             <div
+              className="int-right"
               style={{
-                alignSelf: "stretch",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                overflow: "hidden",
+                alignSelf: "end",
+                justifySelf: "center",
+                width: "480px",
+                maxWidth: "480px",
+                height: "784.914px",
+                overflowX: "clip",
+                overflowY: "clip",
               }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -179,19 +202,113 @@ export default function Integrations() {
                 src="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/6735d29b63a7448ed3346cf2_iphone-integrations-clear.avif"
                 alt=""
                 loading="lazy"
+                className="int-right-img"
                 style={{
-                  /* Fill the grid cell height, let width scale proportionally */
+                  width: "100%",
                   height: "100%",
-                  width: "auto",
-                  maxWidth: "100%",
                   objectFit: "contain",
                   display: "block",
+                  verticalAlign: "middle",
                 }}
               />
             </div>
+
           </div>
         </div>
       </div>
+
+      <style>{`
+        /* ── Tablet (768px – 1439px) ──────────────────────────────────── */
+        @media (max-width: 1439px) {
+          .int-pad {
+            padding-left: clamp(20px, 5vw, 72px) !important;
+            padding-right: clamp(20px, 5vw, 72px) !important;
+          }
+          .int-wrap {
+            padding-top: clamp(64px, 8.89vw, 128px) !important;
+            padding-bottom: clamp(64px, 8.89vw, 128px) !important;
+          }
+          .int-grid {
+            grid-template-columns: 1fr 1fr !important;
+            column-gap: clamp(32px, 6.67vw, 96px) !important;
+          }
+          .int-right {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: clamp(400px, 54.5vw, 784.914px) !important;
+          }
+          .int-heading {
+            font-size: clamp(36px, 4.44vw, 64px) !important;
+            line-height: clamp(36px, 4.44vw, 64px) !important;
+            letter-spacing: clamp(-1.08px, -0.133vw, -1.92px) !important;
+          }
+          .int-para {
+            font-size: clamp(16px, 1.39vw, 20px) !important;
+            line-height: 1.4 !important;
+          }
+          .int-spacer-hd {
+            height: clamp(16px, 2.22vw, 32px) !important;
+          }
+          .int-icons-mb {
+            margin-top: clamp(24px, 3.33vw, 48px) !important;
+            margin-bottom: clamp(32px, 4.44vw, 64px) !important;
+          }
+          .int-icon {
+            width: clamp(44px, 4.44vw, 64px) !important;
+            height: clamp(44px, 4.44vw, 64px) !important;
+          }
+          .int-icons-flex {
+            column-gap: clamp(16px, 2.22vw, 32px) !important;
+            row-gap: clamp(16px, 2.22vw, 32px) !important;
+          }
+        }
+
+        /* ── Mobile (≤ 767px) — stack vertically ─────────────────────── */
+        @media (max-width: 767px) {
+          .int-pad {
+            padding-left: 20px !important;
+            padding-right: 20px !important;
+          }
+          .int-wrap {
+            padding-top: 48px !important;
+            padding-bottom: 48px !important;
+          }
+          .int-grid {
+            grid-template-columns: 1fr !important;
+            column-gap: 0 !important;
+            row-gap: 40px !important;
+          }
+          .int-left { order: 2; }
+          .int-right {
+            order: 1;
+            height: clamp(280px, 80vw, 400px) !important;
+            justify-self: center !important;
+            width: clamp(200px, 60vw, 300px) !important;
+            max-width: 300px !important;
+          }
+          .int-heading {
+            font-size: clamp(32px, 9vw, 44px) !important;
+            line-height: 1.05 !important;
+            letter-spacing: -0.96px !important;
+          }
+          .int-para {
+            font-size: 16px !important;
+            line-height: 1.5 !important;
+            letter-spacing: -0.32px !important;
+          }
+          .int-spacer-hd { height: 16px !important; }
+          .int-icons-mb { margin-bottom: 24px !important; }
+          .int-icon {
+            width: 44px !important;
+            height: 44px !important;
+          }
+          .int-icons-flex {
+            column-gap: 16px !important;
+            row-gap: 16px !important;
+            max-width: 100% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

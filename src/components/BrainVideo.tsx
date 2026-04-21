@@ -37,10 +37,10 @@ export default function BrainVideo() {
   return (
     <section
       ref={sectionRef}
+      className="brain-section"
       style={{
         background: "#000",
         position: "relative",
-        /* Fixed-height so absolute children can be anchored */
         height: "clamp(600px, 59.5vw, 953px)",
         overflow: "hidden",
       }}
@@ -55,11 +55,6 @@ export default function BrainVideo() {
         }}
       >
 
-        {/* ── home-brain_floaters ─────────────────────────────────────
-            Absolutely positioned at the top of the section.
-            z-index 5 → sits on top of the character video.
-            Wide image (cards network) covers the top ~60 % of section.
-        ─────────────────────────────────────────────────────────────── */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/673eb161f734e9a1b54ff1bc_brain-ai-floaters.avif"
@@ -71,9 +66,10 @@ export default function BrainVideo() {
             https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/673eb161f734e9a1b54ff1bc_brain-ai-floaters-p-2000.png 2000w,
             https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/673eb161f734e9a1b54ff1bc_brain-ai-floaters.avif         2950w
           "
-          sizes="100vw"
+          sizes="(max-width: 640px) 100vw, (max-width: 1023px) 92vw, 80vw"
           alt=""
           loading="lazy"
+          className="brain-floaters"
           style={{
             position: "absolute",
             top: 0,
@@ -88,27 +84,18 @@ export default function BrainVideo() {
           }}
         />
 
-        {/* ── home-brain_soshie ───────────────────────────────────────
-            Absolutely positioned, anchored to the BOTTOM-CENTER.
-            Narrow width → video renders at natural portrait aspect,
-            not zoomed. Section overflow:hidden clips the excess top
-            (black area above the character antenna).
-            z-index 2 → cards float on top of character.
-        ─────────────────────────────────────────────────────────────── */}
         <div
-          /* home-brain_soshie */
+          className="brain-video-wrapper"
           style={{
             position: "absolute",
             bottom: "10px",
             left: "50%",
             transform: "translateX(-50%)",
-            /* 384px = native video width (404px) slightly inset — pixel-perfect match */
             width: "clamp(220px, 26.7vw, 338px)",
             zIndex: 2,
             overflow: "hidden",
           }}
         >
-          {/* home-brain_video wrapper */}
           <div style={{ position: "relative" }}>
             <video
               ref={videoRef}
@@ -117,7 +104,6 @@ export default function BrainVideo() {
               playsInline
               loop={false}
               style={{
-                /* Natural aspect ratio — no forced fill/crop */
                 width: "100%",
                 height: "auto",
                 display: "block",
@@ -133,15 +119,11 @@ export default function BrainVideo() {
               />
             </video>
 
-            {/* home-brain_soshie-overlay: fade top & bottom into black */}
             <div
               style={{
                 position: "absolute",
                 inset: 0,
                 background:
-                  /* Top: fade in from black (hides black frame top).
-                     Bottom: aggressive fade starting at 55% → mimics the
-                     original's dark ground shadow that swallows the feet. */
                   "linear-gradient(to bottom, #000 0%, transparent 10%, transparent 45%, rgba(0,0,0,0.6) 72%, rgba(0,0,0,0.88) 85%, #000 100%)",
                 pointerEvents: "none",
                 zIndex: 3,
@@ -151,6 +133,33 @@ export default function BrainVideo() {
         </div>
 
       </div>
+
+      <style>{`
+        /* ── Tablet (641px – 1023px) ──────────────────────────────── */
+        @media (min-width: 641px) and (max-width: 1023px) {
+          .brain-floaters {
+            width: 92% !important;
+          }
+          .brain-video-wrapper {
+            width: clamp(240px, 35vw, 338px) !important;
+          }
+        }
+
+        /* ── Mobile (≤ 640px) ─────────────────────────────────────── */
+        @media (max-width: 640px) {
+          .brain-section {
+            height: clamp(420px, 110vw, 600px) !important;
+          }
+          .brain-floaters {
+            width: 100% !important;
+            max-width: 100% !important;
+          }
+          .brain-video-wrapper {
+            width: clamp(160px, 55vw, 240px) !important;
+            bottom: 0px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

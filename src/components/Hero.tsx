@@ -16,6 +16,7 @@ export default function Hero() {
 
         {/* Layer 1: Left-to-right gradient */}
         <div
+          className="hero-overlay-left"
           style={{
             position: "absolute",
             inset: 0,
@@ -27,6 +28,7 @@ export default function Hero() {
 
         {/* Layer 2: Bottom vignette */}
         <div
+          className="hero-overlay-bottom"
           style={{
             position: "absolute",
             inset: 0,
@@ -38,6 +40,7 @@ export default function Hero() {
 
         {/* Layer 3: Top darkening for navbar readability */}
         <div
+          className="hero-overlay-top"
           style={{
             position: "absolute",
             inset: 0,
@@ -90,7 +93,7 @@ export default function Hero() {
           paddingBottom: "clamp(48px, 7vw, 100px)",
         }}
       >
-        <div style={{ color: "#fff" }}>
+        <div style={{ color: "#fff" }} className="xl:translate-y-[-20px]">
 
           <h1
             className="hero-heading"
@@ -161,6 +164,19 @@ export default function Hero() {
       </div>
 
       <style>{`
+        /* ── Mobile overlays (<640px) ─────────────────────────────────── */
+        @media (max-width: 639px) {
+          .hero-overlay-left {
+            background: linear-gradient(to right, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.12) 35%, transparent 60%) !important;
+          }
+          .hero-overlay-bottom {
+            background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.65) 22%, rgba(0,0,0,0.1) 48%, transparent 60%) !important;
+          }
+          .hero-overlay-top {
+            background: linear-gradient(to bottom, rgba(0,0,0,0.80) 0%, transparent 22%) !important;
+          }
+        }
+
         /* ── Mobile base (<640px) ─────────────────────────────────────── */
         .hero-heading {
           font-size: 38px;

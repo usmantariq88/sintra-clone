@@ -31,8 +31,9 @@ export default function Navbar() {
           position: "relative",
           alignItems: "center",
           height: "68px",
-          paddingLeft: "clamp(20px, 5vw, 72px)",
-          paddingRight: "clamp(20px, 5vw, 72px)",
+          paddingLeft: "clamp(20px, 5vw, 120px)",
+          paddingRight: "clamp(20px, 5vw, 120px)",
+          paddingTop: "12px",
         }}
       >
         <a href="#" style={{ marginRight: "48px", flexShrink: 0, display: "block", lineHeight: 0 }}>
@@ -62,7 +63,7 @@ export default function Navbar() {
                 alignItems: "center",
                 gap: "2px",
                 padding: "8px 18px",
-                fontSize: "18px",
+                fontSize: "17px",
                 fontWeight: 400,
                 letterSpacing: "-0.05px",
                 lineHeight: "27px",
@@ -86,7 +87,7 @@ export default function Navbar() {
           <a
             href="#"
             style={{
-              fontSize: "18px",
+              fontSize: "17px",
               fontWeight: 400,
               color: "#fff",
               textDecoration: "none",

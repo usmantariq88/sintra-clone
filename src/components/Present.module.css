@@ -1,0 +1,273 @@
+.presentSection {
+  position: relative;
+  background: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  font-family: "GT Walsheim Pro", Arial, sans-serif;
+  font-feature-settings: "salt";
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.presentGlow {
+  position: absolute;
+  left: calc(50% - 720px);
+  top: 320px;
+  width: 620px;
+  height: 500px;
+  background: radial-gradient(
+    ellipse 62% 58% at 38% 55%,
+    rgba(82, 15, 160, 0.62) 0%,
+    rgba(40, 8, 80, 0.36) 42%,
+    rgba(0, 0, 0, 0) 74%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.presentGrid {
+  box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 720px 720px;
+  grid-template-rows: 706.312px;
+  grid-auto-columns: 1fr;
+  width: 1440px;
+  height: 1090.312px;
+  padding-top: 192px;
+  padding-bottom: 192px;
+  column-gap: 0;
+  row-gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.presentImageCol {
+  box-sizing: border-box;
+  display: flex;
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: auto;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-end;
+  position: relative;
+  max-width: 100%;
+  width: 720px;
+  height: 706.312px;
+}
+
+.presentImage {
+  box-sizing: border-box;
+  display: block;
+  width: 720px;
+  height: 706.312px;
+  max-width: 960px;
+  object-fit: cover;
+  object-position: 100% 50%;
+  overflow: clip;
+  background-image: url("https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/675e61dc6f7f57ba3ee3806f_purple-blob.avif");
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.presentTextCol {
+  box-sizing: border-box;
+  width: 720px;
+  height: 706.312px;
+  display: block;
+  padding-left: 14px;
+}
+
+.presentTextPanel {
+  box-sizing: border-box;
+  color: rgb(255, 255, 255);
+  display: block;
+  width: 640px;
+  height: 687.562px;
+  padding-top: 128px;
+  padding-right: 72px;
+  padding-bottom: 128px;
+  padding-left: 72px;
+  position: relative;
+  z-index: 1;
+}
+
+.presentTitle {
+  box-sizing: border-box;
+  display: block;
+  width: 496px;
+  height: 192px;
+  margin: 0 0 48px;
+  color: rgb(255, 255, 255);
+  font-size: 64px;
+  font-weight: 500;
+  line-height: 64px;
+  letter-spacing: -1.92px;
+}
+
+.presentParagraph {
+  box-sizing: border-box;
+  display: inline;
+  width: auto;
+  height: auto;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26.6px;
+  letter-spacing: -0.6px;
+}
+
+.presentStrong {
+  color: rgb(255, 255, 255);
+  font-weight: 700;
+}
+
+@media (max-width: 1439px) {
+  .presentGlow {
+    left: max(-120px, calc(50% - 690px));
+    top: 28%;
+    width: clamp(420px, 45vw, 620px);
+    height: clamp(340px, 38vw, 500px);
+  }
+
+  .presentGrid {
+    width: 100%;
+    height: auto;
+    padding-top: clamp(112px, 12vw, 192px);
+    padding-bottom: clamp(112px, 12vw, 192px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto;
+    align-items: center;
+  }
+
+  .presentImageCol {
+    width: 100%;
+    height: clamp(500px, 52vw, 706.312px);
+  }
+
+  .presentImage {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+  }
+
+  .presentTextCol {
+    width: 100%;
+    height: auto;
+    padding-left: clamp(10px, 1.2vw, 14px);
+  }
+
+  .presentTextPanel {
+    width: min(640px, 100%);
+    height: auto;
+    padding-top: clamp(76px, 9vw, 128px);
+    padding-right: clamp(28px, 4.8vw, 72px);
+    padding-bottom: clamp(72px, 9vw, 128px);
+    padding-left: clamp(28px, 4.8vw, 72px);
+  }
+
+  .presentTitle {
+    width: auto;
+    height: auto;
+    font-size: clamp(50px, 4.8vw, 64px);
+    line-height: 1;
+    margin-bottom: clamp(30px, 3.2vw, 48px);
+  }
+
+  .presentParagraph {
+    font-size: clamp(18px, 1.7vw, 20px);
+    line-height: 1.36;
+  }
+}
+
+@media (max-width: 1023px) {
+  .presentGlow {
+    left: -14%;
+    top: 26%;
+    width: clamp(360px, 68vw, 540px);
+    height: clamp(300px, 56vw, 460px);
+  }
+
+  .presentGrid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    row-gap: 28px;
+    padding-top: 92px;
+    padding-bottom: 108px;
+  }
+
+  .presentImageCol {
+    justify-content: center;
+    width: 100%;
+    height: auto;
+  }
+
+  .presentImage {
+    width: min(100%, 720px);
+    height: auto;
+    object-fit: contain;
+    object-position: 50% 50%;
+  }
+
+  .presentTextCol {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  .presentTextPanel {
+    width: min(700px, 100%);
+    margin: 0 auto;
+    padding: 16px 24px 0;
+  }
+
+  .presentTitle {
+    font-size: clamp(42px, 8.5vw, 56px);
+    letter-spacing: -1.4px;
+    margin-bottom: 26px;
+  }
+
+  .presentParagraph {
+    font-size: clamp(17px, 3.2vw, 20px);
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 640px) {
+  .presentGlow {
+    left: -38%;
+    top: 28%;
+    width: 420px;
+    height: 320px;
+  }
+
+  .presentGrid {
+    row-gap: 22px;
+    padding-top: 72px;
+    padding-bottom: 88px;
+  }
+
+  .presentImageCol {
+    height: auto;
+  }
+
+  .presentTextPanel {
+    padding: 6px 20px 0;
+  }
+
+  .presentTitle {
+    font-size: clamp(36px, 12vw, 48px);
+    line-height: 1.03;
+    letter-spacing: -1.1px;
+    margin-bottom: 20px;
+  }
+
+  .presentParagraph {
+    font-size: 18px;
+    line-height: 1.42;
+    letter-spacing: -0.35px;
+  }
+}
