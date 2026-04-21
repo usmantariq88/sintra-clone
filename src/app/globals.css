@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 @theme {
+  --font-sans: "GT Walsheim Pro", Arial, sans-serif;
   --color-sintra-purple: #7c3aed;
   --color-sintra-blue: #3b6cf6;
 }
