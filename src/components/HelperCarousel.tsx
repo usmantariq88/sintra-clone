@@ -413,7 +413,6 @@ export default function HelperCarousel() {
             columnGap: "8px",
             backgroundColor: "#3b82f6",
             color: "#fff",
-            border: "1px solid #3b82f6",
             borderRadius: "1600px",
             padding: "12px 18px",
             fontSize: "17px",
@@ -429,14 +428,8 @@ export default function HelperCarousel() {
             cursor: "pointer",
             transition: "all 0.2s ease",
           }}
-          onMouseEnter={e => {
-            (e.currentTarget as HTMLElement).style.backgroundColor = "#60a5fa";
-            (e.currentTarget as HTMLElement).style.borderColor = "#60a5fa";
-          }}
-          onMouseLeave={e => {
-            (e.currentTarget as HTMLElement).style.backgroundColor = "#3b82f6";
-            (e.currentTarget as HTMLElement).style.borderColor = "#3b82f6";
-          }}
+          onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "#2563eb"; }}
+          onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = "#3b82f6"; }}
         >
           Get helpers
         </a>

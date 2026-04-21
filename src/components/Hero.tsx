@@ -46,7 +46,7 @@ export default function Hero() {
             inset: 0,
             zIndex: 12,
             background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.90) 0%, transparent 18%)",
+              "linear-gradient(to bottom, rgba(0,0,0,0.48) 0%, transparent 22%)",
           }}
         />
 
@@ -146,14 +146,13 @@ export default function Hero() {
                 letterSpacing: "-0.34px",
                 lineHeight: "24px",
                 borderRadius: "1600px",
-                border: "1px solid #3b82f6",
                 textDecoration: "none",
                 transition: "all 0.2s ease",
                 fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
                 columnGap: "8px",
               }}
               className="hero-btn"
-              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.backgroundColor = "#60a5fa")}
+              onMouseEnter={e => ((e.currentTarget as HTMLElement).style.backgroundColor = "#2563eb")}
               onMouseLeave={e => ((e.currentTarget as HTMLElement).style.backgroundColor = "#3b82f6")}
             >
               Get Sintra
@@ -173,7 +172,7 @@ export default function Hero() {
             background: linear-gradient(to top, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.65) 22%, rgba(0,0,0,0.1) 48%, transparent 60%) !important;
           }
           .hero-overlay-top {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.80) 0%, transparent 22%) !important;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 22%) !important;
           }
         }
 
