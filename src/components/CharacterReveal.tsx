@@ -4,11 +4,50 @@ import { useEffect, useRef, useState } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import type { DotLottie } from "@lottiefiles/dotlottie-react";
 
+// Lottie canvas native dimensions — 3840×2650 landscape (aspect = 1.4491…)
+const ASPECT = 3840 / 2650;
+
 export default function CharacterReveal() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [dotLottie, setDotLottie] = useState<DotLottie | null>(null);
   const [totalFrames, setTotalFrames] = useState(0);
 
+  const targetFrameRef = useRef(0);
+  const currentFrameRef = useRef(0);
+  const rafIdRef = useRef<number | null>(null);
+
+  /*
+    JS-driven lottie sizing — the ONLY reliable way to fill the sticky
+    container on actual mobile devices. CSS classes can fail due to:
+      • Tailwind v4 purging non-utility classes
+      • `height: 100%` not resolving through absolute-positioned parents
+      • iOS Safari's 100vh including browser chrome (window.innerHeight is accurate)
+
+    Desktop (>768px): wrapper = 100vw wide, height = undefined (auto)
+    Mobile (≤768px):  wrapper height = window.innerHeight (exact visual viewport)
+                      wrapper width  = height × ASPECT (fills viewport, no distortion)
+  */
+  const [wrapW, setWrapW] = useState<string>("100vw");
+  const [wrapH, setWrapH] = useState<string | undefined>(undefined);
+
+  useEffect(() => {
+    const calc = () => {
+      if (window.innerWidth <= 768) {
+        const vh = window.innerHeight;
+        const vw = Math.ceil(vh * ASPECT);
+        setWrapW(`${vw}px`);
+        setWrapH(`${vh}px`);
+      } else {
+        setWrapW("100vw");
+        setWrapH(undefined);
+      }
+    };
+    calc();
+    window.addEventListener("resize", calc);
+    return () => window.removeEventListener("resize", calc);
+  }, []);
+
+  // ── Lottie load ────────────────────────────────────────────────────────────
   useEffect(() => {
     if (!dotLottie) return;
     const onLoad = () => {
@@ -20,37 +59,47 @@ export default function CharacterReveal() {
     return () => dotLottie.removeEventListener("load", onLoad);
   }, [dotLottie]);
 
+  // ── Scroll-driven lerp animation ───────────────────────────────────────────
   useEffect(() => {
     if (!dotLottie || totalFrames === 0) return;
+
+    // rAF loop continuously eases currentFrame → targetFrame (lerp 0.14)
+    const tick = () => {
+      const diff = targetFrameRef.current - currentFrameRef.current;
+      if (Math.abs(diff) > 0.05) {
+        currentFrameRef.current += diff * 0.14;
+        dotLottie.setFrame(currentFrameRef.current);
+      } else if (Math.abs(diff) > 0.001) {
+        currentFrameRef.current = targetFrameRef.current;
+        dotLottie.setFrame(currentFrameRef.current);
+      }
+      rafIdRef.current = requestAnimationFrame(tick);
+    };
+    rafIdRef.current = requestAnimationFrame(tick);
 
     const handleScroll = () => {
       const section = sectionRef.current;
       if (!section) return;
       const rect = section.getBoundingClientRect();
-      /*
-        Start counting from when the section first enters the viewport (rect.top = innerHeight).
-        Complete when the section has scrolled fully through (rect.top = -(sectionHeight - innerHeight)).
-        Total travel = innerHeight + (sectionHeight - innerHeight) = sectionHeight.
-      */
-      const scrolled = window.innerHeight - rect.top;
-      const progress = Math.min(Math.max(scrolled / section.offsetHeight, 0), 1);
-      dotLottie.pause();
-      dotLottie.setFrame(progress * totalFrames);
+      // 0.82× → animation completes slightly before end of scroll runway
+      const progress = Math.min(
+        Math.max((window.innerHeight - rect.top) / (section.offsetHeight * 0.82), 0),
+        1
+      );
+      targetFrameRef.current = progress * (totalFrames - 1);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafIdRef.current !== null) cancelAnimationFrame(rafIdRef.current);
+    };
   }, [dotLottie, totalFrames]);
 
   return (
     <>
-      {/*
-        Tall section = scroll space for the animation.
-        Sticky child locks to viewport while parent scrolls.
-        At end of this 300vh, the text section below enters from the bottom
-        exactly as the sticky releases — both visible simultaneously.
-      */}
+      {/* 150vh = scroll runway; sticky child locks to viewport while parent scrolls */}
       <section ref={sectionRef} style={{ height: "150vh", background: "#000" }}>
         <div
           style={{
@@ -76,14 +125,20 @@ export default function CharacterReveal() {
             }}
           />
 
-          {/* Lottie — 100vw wide, anchored top-center */}
+          {/*
+            Lottie wrapper — inline styles set via JS so they always take effect
+            (no CSS class specificity/purge issues, no vh unit iOS bugs).
+            Desktop: 100vw × auto     → landscape canvas fills viewport width
+            Mobile:  Wpx × Hpx       → canvas fills exact visual viewport height
+          */}
           <div
             style={{
               position: "absolute",
               top: 0,
               left: "50%",
               transform: "translateX(-50%)",
-              width: "100vw",
+              width: wrapW,
+              height: wrapH,
             }}
           >
             <DotLottieReact
@@ -91,11 +146,18 @@ export default function CharacterReveal() {
               dotLottieRefCallback={setDotLottie}
               autoplay={false}
               loop={false}
-              style={{ width: "100%", height: "auto", display: "block" }}
+              style={{
+                width: "100%",
+                // Explicit pixel height on mobile so the canvas doesn't collapse.
+                // `height: auto` works for <img> but NOT for <canvas> — canvas
+                // has no intrinsic auto height and will render at 0 without it.
+                height: wrapH ?? "auto",
+                display: "block",
+              }}
             />
           </div>
 
-          {/* Bottom vignette — solid black at bottom so it merges flush with text section */}
+          {/* Bottom vignette — solid black flush with text section below */}
           <div
             style={{
               position: "absolute",
@@ -112,42 +174,76 @@ export default function CharacterReveal() {
         </div>
       </section>
 
-      {/* Text section — no top padding so it butts directly against the sticky section's black bottom */}
+      {/*
+        Text section — pixel-perfect at 1440px:
+          outer container: max-width 1280px, centered → 80px auto each side
+          h2 / p:          max-width 768px,  centered → 256px auto each side (matches spec)
+      */}
       <section
         style={{
           background: "#000",
-          textAlign: "center",
-          padding: "0 20px 100px",
+          padding: "0 clamp(16px, 2.78vw, 40px) clamp(64px, 6.94vw, 100px)",
         }}
       >
-        <h2
-          style={{
-            fontSize: "48px",
-            fontWeight: 500,
-            color: "#fff",
-            lineHeight: 1.2,
-            marginBottom: "24px",
-          }}
-        >
-          Find The Right AI Employee
-          <br />
-          for Any Business
-        </h2>
-        <p
-          style={{
-            fontSize: "20px",
-            fontWeight: 400,
-            color: "rgba(255,255,255,0.45)",
-            lineHeight: 1.65,
-            maxWidth: "680px",
-            margin: "0 auto",
-          }}
-        >
-          Every business is different. Your team should be too. That&apos;s why we built AI
-          employees for real business roles. Each worker is designed to take ownership of a
-          specific function — so you can stop juggling, start delegating, and build a team
-          that actually scales with you.
-        </p>
+        <div style={{ maxWidth: "1280px", margin: "0 auto" }}>
+          <h2
+            style={{
+              boxSizing: "border-box",
+              color: "rgb(255, 255, 255)",
+              display: "block",
+              fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+              fontFeatureSettings: '"salt"',
+              fontSize: "clamp(26px, 3.33vw, 48px)",
+              fontWeight: 500,
+              letterSpacing: "-0.03em",
+              lineHeight: 1.1,
+              marginBlockEnd: 0,
+              marginBlockStart: 0,
+              marginBottom: "clamp(16px, 1.67vw, 24px)",
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 0,
+              maxWidth: "768px",
+              textAlign: "center",
+              textRendering: "optimizeLegibility",
+              WebkitFontSmoothing: "antialiased",
+            }}
+          >
+            Find The Right AI Employee
+            <br />
+            for Any Business
+          </h2>
+
+          <p
+            style={{
+              boxSizing: "border-box",
+              color: "rgb(255, 255, 255)",
+              display: "block",
+              fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+              fontFeatureSettings: '"salt"',
+              fontSize: "clamp(15px, 1.39vw, 20px)",
+              fontWeight: 400,
+              letterSpacing: "-0.03em",
+              lineHeight: 1.33,
+              marginBlockEnd: 0,
+              marginBlockStart: 0,
+              marginBottom: 0,
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginTop: 0,
+              maxWidth: "768px",
+              opacity: 0.8,
+              textAlign: "center",
+              textRendering: "optimizeLegibility",
+              WebkitFontSmoothing: "antialiased",
+            }}
+          >
+            Every business is different. Your team should be too. That&apos;s why we built AI
+            employees for real business roles. Each worker is designed to take ownership of a
+            specific function — so you can stop juggling, start delegating, and build a team
+            that actually scales with you.
+          </p>
+        </div>
       </section>
     </>
   );

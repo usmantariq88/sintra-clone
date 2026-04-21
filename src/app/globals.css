@@ -5,11 +5,174 @@
   --color-sintra-blue: #3b6cf6;
 }
 
+/* GT Walsheim Pro — loaded from local fonts */
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-Thin.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-Thin.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-ThinOblique.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-ThinOblique.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-ThinOblique.ttf") format("truetype");
+  font-weight: 100;
+  font-style: oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-UltraLight.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-UltraLight.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-UltraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-UltraLightOblique.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-UltraLightOblique.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-UltraLightOblique.ttf") format("truetype");
+  font-weight: 200;
+  font-style: oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-Light.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-Light.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-LightOblique.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-LightOblique.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-LightOblique.ttf") format("truetype");
+  font-weight: 300;
+  font-style: oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-Regular.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-Regular.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-RegularOblique.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-RegularOblique.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-RegularOblique.ttf") format("truetype");
+  font-weight: 400;
+  font-style: oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-Medium.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-Medium.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-MediumOblique.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-MediumOblique.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-MediumOblique.ttf") format("truetype");
+  font-weight: 500;
+  font-style: oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-Bold.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-Bold.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-BoldOblique.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-BoldOblique.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-BoldOblique.ttf") format("truetype");
+  font-weight: 700;
+  font-style: oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-UltraBold.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-UltraBold.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-UltraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-UltraBoldOblique.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-UltraBoldOblique.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-UltraBoldOblique.ttf") format("truetype");
+  font-weight: 800;
+  font-style: oblique;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-Black.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-Black.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "GT Walsheim Pro";
+  src: url("/fonts/GTWalsheimPro-BlackOblique.woff2") format("woff2"),
+       url("/fonts/GTWalsheimPro-BlackOblique.woff") format("woff"),
+       url("/fonts/GTWalsheimPro-BlackOblique.ttf") format("truetype");
+  font-weight: 900;
+  font-style: oblique;
+  font-display: swap;
+}
+
 body {
   background-color: #000;
   color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  font-family: "GT Walsheim Pro", Arial, sans-serif;
+  font-feature-settings: "salt" on;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 /* Hide scrollbar globally */
@@ -37,3 +200,263 @@ body::-webkit-scrollbar {
 
 .float { animation: float 3s ease-in-out infinite; }
 .pulse-dot { animation: pulse-dot 1.5s ease-in-out infinite; }
+
+/*
+  ── Hero video responsive object-position ──────────────────────────────────
+  width / height / object-fit / transform are all inline on the <video>
+  element for guaranteed cross-device reliability. This class only handles
+  object-position breakpoints — shifting the frame down on smaller viewports
+  so the character body is visible instead of the ceiling dominating.
+*/
+@media (max-width: 639px) {
+  .hero-video {
+    object-position: center 62%;
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero-video {
+    object-position: center 56%;
+  }
+}
+
+@media (min-width: 1280px) {
+  .automations-copy {
+    margin-top: 230px !important;
+  }
+
+  .automations-heading,
+  .automations-paragraph {
+    width: 768px !important;
+    max-width: 768px !important;
+  }
+}
+
+@media (max-width: 1439px) {
+  .automations-section {
+    padding-top: clamp(320px, 46vw, 560px) !important;
+    padding-left: clamp(16px, 3.6vw, 32px) !important;
+    padding-right: clamp(16px, 3.6vw, 32px) !important;
+  }
+
+  .automations-copy {
+    margin-top: clamp(84px, 14vw, 170px) !important;
+  }
+
+  .automations-heading {
+    font-size: clamp(42px, 5.2vw, 58px) !important;
+    line-height: 1.02 !important;
+    letter-spacing: clamp(-1.2px, -0.12vw, -1.74px) !important;
+  }
+
+  .automations-copy-spacer {
+    height: 24px !important;
+  }
+
+  .automations-paragraph {
+    font-size: clamp(17px, 1.7vw, 20px) !important;
+    line-height: 1.42 !important;
+    letter-spacing: clamp(-0.36px, -0.05vw, -0.56px) !important;
+  }
+
+  .automations-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    padding-top: clamp(44px, 5vw, 60px) !important;
+    padding-bottom: clamp(72px, 7vw, 96px) !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: auto !important;
+    column-gap: clamp(16px, 2.6vw, 28px) !important;
+    row-gap: clamp(16px, 2.6vw, 28px) !important;
+  }
+
+  .automations-card {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    grid-template-columns: minmax(0, 1fr) !important;
+    grid-template-rows: auto auto !important;
+    column-gap: 0 !important;
+    row-gap: 0 !important;
+    border-radius: 18px !important;
+  }
+
+  .automations-card-wide {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-template-rows: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .automations-card-content {
+    width: 100% !important;
+    height: auto !important;
+    padding: clamp(28px, 3.3vw, 40px) clamp(24px, 2.9vw, 34px) clamp(18px, 2vw, 24px) !important;
+  }
+
+  .automations-card-media {
+    width: 100% !important;
+    height: auto !important;
+    padding-top: clamp(24px, 4vw, 52px) !important;
+    padding-left: clamp(10px, 1.5vw, 18px) !important;
+    padding-right: clamp(10px, 1.5vw, 18px) !important;
+  }
+
+  .automations-card h3 {
+    width: auto !important;
+    font-size: clamp(30px, 2.85vw, 36px) !important;
+    line-height: 1.14 !important;
+    letter-spacing: -0.9px !important;
+  }
+
+  .automations-card p {
+    width: auto !important;
+    display: block !important;
+    font-size: clamp(16px, 1.45vw, 18px) !important;
+    line-height: 1.5 !important;
+    letter-spacing: -0.28px !important;
+  }
+
+  .automations-card-media img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: 50% 100% !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .automations-section {
+    padding-top: clamp(240px, 60vw, 430px) !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  .automations-copy {
+    margin-top: clamp(60px, 12vw, 120px) !important;
+  }
+
+  .automations-heading {
+    font-size: clamp(34px, 6.4vw, 46px) !important;
+    line-height: 1.06 !important;
+    letter-spacing: -0.9px !important;
+  }
+
+  .automations-copy-spacer {
+    height: 18px !important;
+  }
+
+  .automations-paragraph {
+    font-size: clamp(15px, 2.7vw, 18px) !important;
+    line-height: 1.48 !important;
+    letter-spacing: -0.24px !important;
+  }
+
+  .automations-grid {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    column-gap: 0 !important;
+    row-gap: 14px !important;
+  }
+
+  .automations-card-wide {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+  }
+
+  .automations-card,
+  .automations-card-wide {
+    justify-self: stretch !important;
+  }
+}
+
+@media (max-width: 639px) {
+  .automations-section {
+    padding-top: clamp(190px, 70vw, 320px) !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+
+  .automations-copy {
+    margin-top: clamp(0px, 10vw, 72px) !important;
+  }
+
+  .automations-heading {
+    font-size: clamp(30px, 9.2vw, 38px) !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.6px !important;
+  }
+
+  .automations-paragraph {
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    letter-spacing: -0.2px !important;
+  }
+
+  .automations-grid {
+    padding-top: 24px !important;
+    padding-bottom: 64px !important;
+    row-gap: 32px !important;
+    column-gap: 0 !important;
+  }
+
+  .automations-card,
+  .automations-card-wide {
+    width: 359px !important;
+    max-width: 359px !important;
+    height: auto !important;
+    justify-self: center !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto 1fr !important;
+    row-gap: 0 !important;
+    border-radius: 16px !important;
+  }
+
+  .automations-card-wide {
+    min-height: 604px !important;
+  }
+
+  .automations-card-blue {
+    min-height: 582px !important;
+  }
+
+  .automations-card-yellow {
+    min-height: 533px !important;
+  }
+
+  .automations-card-content {
+    padding: 18px 20px 10px !important;
+  }
+
+  .automations-card h3 {
+    font-size: 24px !important;
+    line-height: 1.16 !important;
+    letter-spacing: -0.6px !important;
+  }
+
+  .automations-card p {
+    font-size: 15px !important;
+    line-height: 1.4 !important;
+    letter-spacing: -0.2px !important;
+  }
+
+  .automations-card-media {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 260px !important;
+    padding-top: 8px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .automations-card-media img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: 50% 100% !important;
+  }
+}

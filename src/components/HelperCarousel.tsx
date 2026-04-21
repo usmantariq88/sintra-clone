@@ -1,121 +1,425 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 
-const VIDEO_URL =
-  "https://cdn.prod.website-files.com/673ead940412138dd4bf8e83%2F67460cd41f42038374d698aa_commet_idle_short_blink_1-transcode.mp4";
+const CDN = "https://cdn.prod.website-files.com/673ead940412138dd4bf8e83%2F";
 
-const helpers = [
-  { name: "Cassie",  role: "Customer Support Specialist", desc: "As a smart and charming AI for customer support, Cassie crafts expertly tailored responses to customer queries while maintaining your brand's unique voice. Cassie works alongside your human employees, supporting them to deliver exceptional service." },
-  { name: "Commet",  role: "eCommerce Manager",            desc: "Your trusted eCommerce guru, here to guide you through online store setup, product launches, and streamline business processes with efficient processing of orders, inventory, and customer data." },
-  { name: "Dexter",  role: "Data Analyst",                 desc: "A data genius seamlessly transforming complex data into precise calculations, forecasts, and clear, actionable business insights that drive results. With Dexter, you gain actionable insights that inform your business decisions." },
-  { name: "Emmie",   role: "Email Marketer",               desc: "Builds email campaigns, writes compelling sequences, and optimizes open rates to drive conversions. Emmie turns your list into loyal customers through smart, personalized communication." },
-  { name: "Penn",    role: "Creative Copywriter",          desc: "Writes blog posts, ads, landing pages, and marketing copy that converts — in your brand's voice. Penn crafts content that speaks directly to your audience and drives action." },
-  { name: "Soshie",  role: "Social Media Manager",         desc: "Plans, creates, and schedules social content across all platforms to grow your audience effortlessly. Soshie keeps your brand visible and engaging 24/7." },
-  { name: "Seomi",   role: "SEO Strategist",               desc: "Researches keywords, optimizes content, and builds strategies to rank your website on Google's first page. Seomi gives your business the organic visibility it deserves." },
-  { name: "Vizzy",   role: "Executive Assistant",          desc: "Manages your calendar, drafts emails, schedules meetings, and keeps you organized like a top-tier EA. Vizzy handles the details so you can focus on the big picture." },
-];
+const HELPERS = [
+  {
+    id: "buddy", name: "Buddy", href: "/buddy",
+    desc: "Business Development Manager. Your go-to AI for business development, crafting growth strategies, delivering business insights, and excelling in AI for marketing to ensure success in product launches, audience analysis, and more. Buddy has helped companies of all sizes achieve their business development goals.",
+    poster: CDN + "67460c4c525b5d57a4e8bb02_buddy_idle_short_blink_1-poster-00001.jpg",
+    mp4:    CDN + "67460c4c525b5d57a4e8bb02_buddy_idle_short_blink_1-transcode.mp4",
+    webm:   CDN + "67460c4c525b5d57a4e8bb02_buddy_idle_short_blink_1-transcode.webm",
+  },
+  {
+    id: "cassie", name: "Cassie", href: "/cassie",
+    desc: "Customer Support Specialist. As a smart and charming AI for customer support, Cassie crafts expertly tailored responses to customer queries while maintaining your brand's unique voice. Cassie works alongside your human employees, supporting them to deliver exceptional customer support.",
+    poster: CDN + "67460ccdf6e4fa275a7c75a9_cassie_idle_short_blink_1-poster-00001.jpg",
+    mp4:    CDN + "67460ccdf6e4fa275a7c75a9_cassie_idle_short_blink_1-transcode.mp4",
+    webm:   CDN + "67460ccdf6e4fa275a7c75a9_cassie_idle_short_blink_1-transcode.webm",
+  },
+  {
+    id: "commet", name: "Commet", href: "/commet",
+    desc: "eCommerce Manager. Your trusted eCommerce guru, here to guide you through online store setup, product launches, and streamline business processes with efficient processing of orders, inventory, and customer data.",
+    poster: CDN + "67460cd41f42038374d698aa_commet_idle_short_blink_1-poster-00001.jpg",
+    mp4:    CDN + "67460cd41f42038374d698aa_commet_idle_short_blink_1-transcode.mp4",
+    webm:   CDN + "67460cd41f42038374d698aa_commet_idle_short_blink_1-transcode.webm",
+  },
+  {
+    id: "dexter", name: "Dexter", href: "/dexter",
+    desc: "Data Analyst. A data genius seamlessly transforming complex data into precise calculations, forecasts, and clear, actionable business insights that drive results. With Dexter, you gain actionable insights that inform your business decisions.",
+    poster: CDN + "67460cdad71380b27d8ea973_dexter_idle_short_blink_1-poster-00001.jpg",
+    mp4:    CDN + "67460cdad71380b27d8ea973_dexter_idle_short_blink_1-transcode.mp4",
+    webm:   CDN + "67460cdad71380b27d8ea973_dexter_idle_short_blink_1-transcode.webm",
+  },
+  {
+    id: "emmie", name: "Emmie", href: "/emmie",
+    desc: "Email Marketing Specialist. From crafting engaging emails to generating effective win-back flows, Emmie uses her AI-powered solutions to turn your subscriber list into revenue. Emmie also helps reduce the cost of email marketing campaigns while increasing ROI.",
+    poster: CDN + "67460cdf842bd7f9ed3683d5_emmie_idle_short_blink_1-poster-00001.jpg",
+    mp4:    CDN + "67460cdf842bd7f9ed3683d5_emmie_idle_short_blink_1-transcode.mp4",
+    webm:   CDN + "67460cdf842bd7f9ed3683d5_emmie_idle_short_blink_1-transcode.webm",
+  },
+  {
+    id: "gigi", name: "Gigi", href: "/gigi",
+    desc: "Personal Growth Coach. Boost productivity with AI — whether you need help planning meals, organizing study sessions, or building workout routines, Gigi is here to support your journey to a better self and bring balance and improvement to your daily life.",
+    poster: CDN + "67460ce788887965a3f51d76_gigi_idle_short_blink_1-poster-00001.jpg",
+    mp4:    CDN + "67460ce788887965a3f51d76_gigi_idle_short_blink_1-transcode.mp4",
+    webm:   CDN + "67460ce788887965a3f51d76_gigi_idle_short_blink_1-transcode.webm",
+  },
+  {
+    id: "penn", name: "Penn", href: "/penn",
+    desc: "Copywriter. Dedicated to writing compelling copy for your ads, blog posts, websites, advertorials and other marketing campaigns that convert readers into customers. Penn can generate engaging ad copy for a new product launch or craft a persuasive email marketing campaign to boost conversions.",
+    poster: CDN + "67460ced1ae3bb4bd972d59e_penn_idle_short_blink_1-poster-00001.jpg",
+    mp4:    CDN + "67460ced1ae3bb4bd972d59e_penn_idle_short_blink_1-transcode.mp4",
+    webm:   CDN + "67460ced1ae3bb4bd972d59e_penn_idle_short_blink_1-transcode.webm",
+  },
+  {
+    id: "scouty", name: "Scouty", href: "/scouty",
+    desc: "Recruiter. Turning hiring challenges into opportunities, crafting magnetic job posts, and guiding smooth team onboarding. Scouty can support recruitment needs across all departments, from HR to finance to customer service.",
+    poster: CDN + "67460cf23297a144839f1512_scouty_idle_short_blink_1-poster-00001.jpg",
+    mp4:    CDN + "67460cf23297a144839f1512_scouty_idle_short_blink_1-transcode.mp4",
+    webm:   CDN + "67460cf23297a144839f1512_scouty_idle_short_blink_1-transcode.webm",
+  },
+  {
+    id: "seomi", name: "Seomi", href: "/seomi",
+    desc: "SEO Specialist. Streamline business processes with Seomi's proven SEO strategies, SEO-optimized blog posts, and AI-powered solutions to boost your website rankings. Seomi brings advanced SEO skills to your team, helping you stay ahead in search rankings.",
+    poster: CDN + "67460cf8218f6fb4b7f708b2_seomi_idle_short_blilnk_1-poster-00001.jpg",
+    mp4:    CDN + "67460cf8218f6fb4b7f708b2_seomi_idle_short_blilnk_1-transcode.mp4",
+    webm:   CDN + "67460cf8218f6fb4b7f708b2_seomi_idle_short_blilnk_1-transcode.webm",
+  },
+  {
+    id: "soshie", name: "Soshie", href: "/soshie",
+    desc: "Social Media Manager. Boost productivity with AI social media manager by using business automation tools — generate content, plan strategies, schedule posts, find trends, and more. Soshie can collaborate with your marketing and content teams to ensure a unified social media strategy.",
+    poster: CDN + "67460cfe78dd86c42545bad8_soshie_idle_short_blink_1-poster-00001.jpg",
+    mp4:    CDN + "67460cfe78dd86c42545bad8_soshie_idle_short_blink_1-transcode.mp4",
+    webm:   CDN + "67460cfe78dd86c42545bad8_soshie_idle_short_blink_1-transcode.webm",
+  },
+  {
+    id: "vizzy", name: "Vizzy", href: "/vizzy",
+    desc: "Virtual Assistant. A trustworthy AI for business owners and busy entrepreneurs to handle calendars, schedule meetings, plan trips, or simply ask AI questions about daily challenges.",
+    poster: CDN + "67460d0381cab44875de2583_vizzy_idle_short_blink_1-poster-00001.jpg",
+    mp4:    CDN + "67460d0381cab44875de2583_vizzy_idle_short_blink_1-transcode.mp4",
+    webm:   CDN + "67460d0381cab44875de2583_vizzy_idle_short_blink_1-transcode.webm",
+  },
+  {
+    id: "milli", name: "Milli", href: "/milli",
+    desc: "Sales Manager. Milli uses your business insights to craft compelling cold call scripts, design persuasive cold emails, and build pitches that help you close deals with confidence. Milli is also capable of adapting sales strategies to different audiences and markets.",
+    poster: CDN + "67460d0a566f3616a558637a_milli_idle_short_blink_1-poster-00001.jpg",
+    mp4:    CDN + "67460d0a566f3616a558637a_milli_idle_short_blink_1-transcode.mp4",
+    webm:   CDN + "67460d0a566f3616a558637a_milli_idle_short_blink_1-transcode.webm",
+  },
+] as const;
 
-const CARD_W = 380;
-const GAP    = 20;
-// 80 px left offset → at scroll=0: 80px dark peek on left, card0–2 visible, ~160px of card3 on right
-const PEEK   = 80;
+interface Dims {
+  cardW: number;
+  videoH: number;
+  gap: number;
+  leftPad: number;
+  arrowInset: number;
+  arrowSize: number;
+  overlayW: number;
+  visibleCount: number;
+  nameFontSize: string;
+  descFontSize: string;
+}
+
+function calcDims(vw: number): Dims {
+  if (vw < 900) {
+    const isPhone = vw < 640;
+    const cardW = Math.min(560, vw - 56);
+    const gap = isPhone ? 16 : 20;
+    const sideGutter = Math.round((vw - cardW) / 2);
+    return {
+      cardW,
+      videoH: Math.round(cardW * 1.765),
+      gap,
+      leftPad: sideGutter,
+      arrowInset: isPhone ? 8 : 16,
+      arrowSize: isPhone ? 2.875 : 3.25,
+      overlayW: isPhone ? Math.max(30, sideGutter + 8) : 76,
+      visibleCount: 1,
+      nameFontSize: isPhone ? "1.25rem" : "1.875rem",
+      descFontSize: isPhone ? "0.9375rem" : "1.0625rem",
+    };
+  }
+  if (vw < 1280) {
+    const cardW = 320;
+    const gap = 24;
+    return {
+      cardW,
+      videoH: Math.round(cardW * 1.765),
+      gap,
+      leftPad: Math.round((vw - 2 * cardW - gap) / 2),
+      arrowInset: 16,
+      arrowSize: 3.25,
+      overlayW: 120,
+      visibleCount: 2,
+      nameFontSize: "1.5rem",
+      descFontSize: "1rem",
+    };
+  }
+  const cardW = 340;
+  const gap = 32;
+  return {
+    cardW,
+    videoH: 600,
+    gap,
+    leftPad: Math.round((vw - 3 * cardW - 2 * gap) / 2),
+    arrowInset: 24,
+    arrowSize: 3.5,
+    overlayW: 160,
+    visibleCount: 3,
+    nameFontSize: "1.875rem",
+    descFontSize: "1.0625rem",
+  };
+}
+
+const NextIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none" style={{ width: "70%", height: "70%" }}>
+    <path d="M8.33203 19.9987H31.6654M31.6654 19.9987L19.9987 8.33203M31.6654 19.9987L19.9987 31.6654"
+      stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+const PrevIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none" style={{ width: "70%", height: "70%" }}>
+    <path d="M31.668 19.9987H8.33464M8.33464 19.9987L20.0013 8.33203M8.33464 19.9987L20.0013 31.6654"
+      stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
 
 export default function HelperCarousel() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [idx, setIdx] = useState(0);
-  const max = helpers.length - 3; // last valid starting index showing 3 full cards
+  const [active, setActive] = useState(0);
+  const [dims, setDims] = useState<Dims>(() =>
+    calcDims(typeof window !== "undefined" ? window.innerWidth : 1280)
+  );
+  const [maxIdx, setMaxIdx] = useState(HELPERS.length - 3);
 
-  const slide = (dir: 1 | -1) => {
-    const next = Math.max(0, Math.min(idx + dir, max));
-    setIdx(next);
-    trackRef.current?.scrollTo({ left: next * (CARD_W + GAP), behavior: "smooth" });
+  const touchX = useRef(0);
+  const touchY = useRef(0);
+
+  useEffect(() => {
+    const update = () => {
+      const vw = window.innerWidth;
+      const d = calcDims(vw);
+      setDims(d);
+      setMaxIdx(Math.max(0, HELPERS.length - d.visibleCount));
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  useEffect(() => {
+    setActive(prev => Math.min(prev, maxIdx));
+  }, [maxIdx]);
+
+  const goNext = () => setActive(prev => Math.min(prev + 1, maxIdx));
+  const goPrev = () => setActive(prev => Math.max(prev - 1, 0));
+
+  const tx = dims.leftPad - active * (dims.cardW + dims.gap);
+
+  const arrowBase: React.CSSProperties = {
+    position: "absolute",
+    top: `${dims.videoH / 2}px`,
+    transform: "translateY(-50%)",
+    zIndex: 20,
+    width: `${dims.arrowSize}rem`,
+    height: `${dims.arrowSize}rem`,
+    borderRadius: "100%",
+    border: "none",
+    background: "#353033",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    boxShadow: "0 4px 52px #000",
+    flexShrink: 0,
+    cursor: "pointer",
+    transition: "opacity 0.2s ease",
   };
 
   return (
-    <section style={{ background: "#000", padding: "60px 0 80px", position: "relative", overflow: "hidden" }}>
-
-      {/* Left & right edge fade — same as actual site's vignette effect */}
-      <div style={{ position: "absolute", inset: 0, zIndex: 3, pointerEvents: "none",
-        background: "linear-gradient(to right, #000 0%, transparent 10%, transparent 88%, #000 100%)" }} />
-
-      {/* Arrows — sit inside the fade zone, vertically centred on the video */}
-      <button onClick={() => slide(-1)} disabled={idx === 0} aria-label="Previous"
-        style={{
-          position: "absolute", left: "16px", top: "calc(60px + 260px)", transform: "translateY(-50%)",
-          zIndex: 4, width: "48px", height: "48px", borderRadius: "50%",
-          background: "rgba(255,255,255,0.15)", border: "none",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          color: "#fff", cursor: idx === 0 ? "default" : "pointer",
-          opacity: idx === 0 ? 0.3 : 1, transition: "opacity .2s",
-        }}>
-        <ChevronLeft size={24} />
-      </button>
-
-      <button onClick={() => slide(1)} disabled={idx >= max} aria-label="Next"
-        style={{
-          position: "absolute", right: "16px", top: "calc(60px + 260px)", transform: "translateY(-50%)",
-          zIndex: 4, width: "48px", height: "48px", borderRadius: "50%",
-          background: "rgba(255,255,255,0.15)", border: "none",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          color: "#fff", cursor: idx >= max ? "default" : "pointer",
-          opacity: idx >= max ? 0.3 : 1, transition: "opacity .2s",
-        }}>
-        <ChevronRight size={24} />
-      </button>
-
-      {/* Scrollable track */}
+    <section style={{ background: "#000", padding: "8rem 0" }}>
+      {/* Full-width carousel track with overflow clip */}
       <div
-        ref={trackRef}
-        style={{
-          display: "flex",
-          gap: `${GAP}px`,
-          overflowX: "auto",
-          scrollSnapType: "x mandatory",
-          scrollbarWidth: "none",
-          /* PEEK left offset + matching right padding */
-          paddingLeft: `${PEEK}px`,
-          paddingRight: `${PEEK}px`,
-          paddingBottom: "0",
+        style={{ position: "relative", overflow: "hidden", width: "100%" }}
+        onTouchStart={e => {
+          touchX.current = e.touches[0].clientX;
+          touchY.current = e.touches[0].clientY;
+        }}
+        onTouchEnd={e => {
+          const dx = e.changedTouches[0].clientX - touchX.current;
+          const dy = e.changedTouches[0].clientY - touchY.current;
+          if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+            dx < 0 ? goNext() : goPrev();
+          }
         }}
       >
-        {helpers.map((h) => (
-          <div key={h.name} style={{ flex: `0 0 ${CARD_W}px`, scrollSnapAlign: "start" }}>
+        
+        {/* Left dark fade overlay covering the full card area (video + text). */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: `${dims.overlayW}px`,
+            background: "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
+            zIndex: 15,
+            pointerEvents: "none",
+          }}
+        />
 
-            {/* Video card */}
-            <div style={{
-              width: `${CARD_W}px`, height: "520px",
-              borderRadius: "18px", overflow: "hidden",
-              position: "relative", background: "#111",
-            }}>
-              {/* Dark gradient at top of each card (matches actual site) */}
-              <div style={{
-                position: "absolute", top: 0, left: 0, right: 0, height: "120px", zIndex: 1,
-                background: "linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 100%)",
-                pointerEvents: "none",
-              }} />
-              <video
-                src={VIDEO_URL}
-                autoPlay muted loop playsInline
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-            </div>
+        {/* Right dark fade overlay covering the full card area (video + text). */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: `${dims.overlayW}px`,
+            background: "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
+            zIndex: 15,
+            pointerEvents: "none",
+          }}
+        />
 
-            {/* Name + description below the card */}
-            <div style={{ padding: "20px 6px 0" }}>
-              <h3 style={{ fontSize: "26px", fontWeight: 700, color: "#fff", margin: "0 0 10px", lineHeight: 1.2 }}>
-                {h.name}
-              </h3>
-              <p style={{ fontSize: "15px", fontWeight: 400, color: "rgba(255,255,255,0.5)", lineHeight: 1.65, margin: 0 }}>
-                {h.role}. {h.desc}
-              </p>
-            </div>
 
-          </div>
-        ))}
+        {/* Prev arrow */}
+        <button
+          onClick={goPrev}
+          disabled={active === 0}
+          aria-label="Previous helper"
+          style={{ ...arrowBase, left: `${dims.arrowInset}px`, opacity: active === 0 ? 0.35 : 1, cursor: active === 0 ? "not-allowed" : "pointer" }}
+        >
+          <PrevIcon />
+        </button>
+
+        {/* Next arrow */}
+        <button
+          onClick={goNext}
+          disabled={active >= maxIdx}
+          aria-label="Next helper"
+          style={{ ...arrowBase, right: `${dims.arrowInset}px`, opacity: active >= maxIdx ? 0.35 : 1, cursor: active >= maxIdx ? "not-allowed" : "pointer" }}
+        >
+          <NextIcon />
+        </button>
+
+        {/* Sleeve */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-start",
+            transform: `translate3d(${tx}px, 0px, 0px)`,
+            transition: "transform 0.42s cubic-bezier(0.4, 0, 0.2, 1)",
+            willChange: "transform",
+          }}
+        >
+          {HELPERS.map((h) => {
+            return (
+              <div
+                key={h.id}
+                style={{ flexShrink: 0, width: `${dims.cardW}px`, marginRight: `${dims.gap}px` }}
+              >
+                <a
+                  href={h.href}
+                  style={{
+                    display: "block",
+                    textDecoration: "none",
+                    borderRadius: "1rem",
+                    overflow: "hidden",
+                    width: `${dims.cardW}px`,
+                    height: `${dims.videoH}px`,
+                    position: "relative",
+                  }}
+                >
+                  <video
+                    poster={h.poster}
+                    autoPlay muted loop playsInline
+                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+                  >
+                    <source src={h.mp4}  type="video/mp4" />
+                    <source src={h.webm} type="video/webm" />
+                  </video>
+                </a>
+
+                <div
+                  style={{
+                    paddingTop: "1.5rem",
+                  }}
+                >
+                  <a href={h.href} style={{ textDecoration: "none", display: "inline-block", marginBottom: "0.5rem" }}>
+                    <h2
+                      style={{
+                        fontSize: dims.nameFontSize,
+                        fontWeight: 500,
+                        lineHeight: 1.2,
+                        letterSpacing: "-0.03em",
+                        color: "#fff",
+                        margin: 0,
+                        fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+                        WebkitFontSmoothing: "antialiased",
+                        textRendering: "optimizeLegibility",
+                      }}
+                    >
+                      {h.name}
+                    </h2>
+                  </a>
+
+                  <p
+                    style={{
+                      fontSize: dims.descFontSize,
+                      fontWeight: 400,
+                      lineHeight: 1.5,
+                      color: "#a3a3a3",
+                      margin: 0,
+                      fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+                      WebkitFontSmoothing: "antialiased",
+                      textRendering: "optimizeLegibility",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 5,
+                      WebkitBoxOrient: "vertical" as const,
+                      overflow: "hidden",
+                    }}
+                  >
+                    {h.desc}
+                  </p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
 
+      {/* Centered "Get helpers" button */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          marginTop: "2.5rem",
+        }}
+      >
+        <a
+          href="/ai-team"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            justifyContent: "center",
+            columnGap: "8px",
+            backgroundColor: "#3b82f6",
+            color: "#fff",
+            border: "1px solid #3b82f6",
+            borderRadius: "1600px",
+            padding: "12px 18px",
+            fontSize: "17px",
+            fontWeight: 500,
+            lineHeight: "24px",
+            height: "50px",
+            minHeight: "48px",
+            textDecoration: "none",
+            fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+            fontFeatureSettings: '"salt"',
+            WebkitFontSmoothing: "antialiased",
+            textRendering: "optimizeLegibility",
+            cursor: "pointer",
+            transition: "all 0.2s ease",
+          }}
+          onMouseEnter={e => {
+            (e.currentTarget as HTMLElement).style.backgroundColor = "#60a5fa";
+            (e.currentTarget as HTMLElement).style.borderColor = "#60a5fa";
+          }}
+          onMouseLeave={e => {
+            (e.currentTarget as HTMLElement).style.backgroundColor = "#3b82f6";
+            (e.currentTarget as HTMLElement).style.borderColor = "#3b82f6";
+          }}
+        >
+          Get helpers
+        </a>
+      </div>
     </section>
   );
 }

@@ -7,7 +7,17 @@ export default function Automations() {
       the top — exactly matching .home-automations_background { position:absolute;
       inset: 0% 0% auto; aspect-ratio: 3/2 } from the actual site CSS.
     */
-    <section style={{ position: "relative", background: "#000", color: "#fff" }}>
+    <section
+      className="automations-section"
+      style={{
+        position: "relative",
+        background: "#000",
+        color: "#fff",
+        paddingTop: "clamp(320px, 42vw, 604.8px)",
+        paddingLeft: "clamp(16px, 2.78vw, 40px)",
+        paddingRight: "clamp(16px, 2.78vw, 40px)",
+      }}
+    >
 
       {/* ── Background image — absolute, 3:2 aspect ratio, top-anchored ── */}
       <div
@@ -40,47 +50,55 @@ export default function Automations() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.82) 78%, #000 100%)",
+              "linear-gradient(to bottom, rgba(0,0,0,0.08) 60%, #000 100%)",
           }}
         />
       </div>
 
       {/* ── Content — sits on top, its height drives the section height ── */}
       <div
+        className="automations-copy xl:!mt-[230px]"
         style={{
           position: "relative",
           zIndex: 2,
-          maxWidth: "860px",
+          maxWidth: "768px",
           margin: "0 auto",
-          /*
-            padding-top pushes the heading to ~70 % of the background height.
-            Background height = 66.67 vw, so 70 % ≈ 46.7 vw.
-            clamp() keeps it sane on very small / very large screens.
-          */
-          padding: "clamp(260px, 46vw, 700px) 24px 0",
+          padding: 0,
           textAlign: "center",
         }}
       >
         <h2
+          className="automations-heading xl:w-[768px] xl:max-w-[768px]"
           style={{
-            fontSize: "clamp(32px, 4.5vw, 64px)",
-            fontWeight: 700,
+            fontSize: "64px",
+            fontWeight: 500,
             color: "#fff",
-            lineHeight: 1.12,
-            letterSpacing: "-0.02em",
-            margin: "0 0 20px",
+            lineHeight: "64px",
+            letterSpacing: "-1.92px",
+            margin: 0,
+            fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+            fontFeatureSettings: '"salt"',
+            WebkitFontSmoothing: "antialiased",
+            textRendering: "optimizeLegibility",
           }}
         >
           Employ AI staff to automate<br />work. Even while you sleep.
         </h2>
+        <div className="automations-copy-spacer" style={{ height: "32px" }} />
         <p
+          className="automations-paragraph xl:w-[768px] xl:max-w-[768px]"
           style={{
-            fontSize: "clamp(15px, 1.4vw, 20px)",
+            fontSize: "20.8px",
             fontWeight: 400,
-            color: "rgba(255,255,255,0.55)",
-            lineHeight: 1.65,
-            maxWidth: "620px",
-            margin: "0 auto",
+            color: "#fff",
+            opacity: 0.6,
+            letterSpacing: "-0.624px",
+            lineHeight: "29.12px",
+            margin: 0,
+            fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+            fontFeatureSettings: '"salt"',
+            WebkitFontSmoothing: "antialiased",
+            textRendering: "optimizeLegibility",
           }}
         >
           You don&apos;t need hundreds of employees to run a modern business. Sintra AI gives
@@ -92,32 +110,66 @@ export default function Automations() {
 
       {/* ── Cards grid ── */}
       <div
+        className="automations-grid"
         style={{
           position: "relative",
           zIndex: 2,
-          maxWidth: "960px",
+          width: "1024px",
+          maxWidth: "1024px",
           margin: "0 auto",
-          padding: "64px 24px 100px",
+          padding: "64px 0 100px",
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "16px",
+          gridAutoColumns: "1fr",
+          gridTemplateColumns: "488px 488px",
+          gridTemplateRows: "586.242px 737.555px",
+          columnGap: "48px",
+          rowGap: "48px",
+          boxSizing: "border-box",
+          color: "rgb(255, 255, 255)",
+          fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+          fontFeatureSettings: '"salt"',
+          fontSize: "17px",
+          fontWeight: 400,
+          lineHeight: "25.5px",
+          WebkitFontSmoothing: "antialiased",
+          textRendering: "optimizeLegibility",
         }}
       >
 
         {/* ── Soshie — spans both columns, text left / image right ── */}
         <div
+          className="automations-card automations-card-wide"
           style={{
             gridColumn: "1 / -1",
-            background: "#7840EB",
-            borderRadius: "20px",
-            overflow: "hidden",
+            width: "100%",
+            maxWidth: "1024px",
+            justifySelf: "center",
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+            backgroundImage: "linear-gradient(rgb(139, 92, 246), rgb(81, 54, 144))",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            borderRadius: "16px",
+            boxShadow: "rgba(130, 58, 255, 0.4) 0px 0px 70px 0px",
+            boxSizing: "border-box",
             display: "grid",
-            gridTemplateColumns: "1fr 1fr",
-            minHeight: "380px",
+            gridTemplateColumns: "511px 511px",
+            gridTemplateRows: "584.242px",
+            height: "586.242px",
+            columnGap: 0,
+            rowGap: 0,
+            overflow: "hidden",
+            color: "rgb(255, 255, 255)",
+            fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+            fontFeatureSettings: '"salt"',
+            fontSize: "17px",
+            fontWeight: 400,
+            lineHeight: "25.5px",
+            WebkitFontSmoothing: "antialiased",
+            textRendering: "optimizeLegibility",
           }}
         >
           {/* Text — left half, vertically centred */}
           <div
+            className="automations-card-content"
             style={{
               padding: "56px 48px",
               display: "flex",
@@ -127,22 +179,35 @@ export default function Automations() {
           >
             <h3
               style={{
-                fontSize: "clamp(24px, 2.4vw, 34px)",
-                fontWeight: 700,
-                color: "#fff",
-                lineHeight: 1.2,
-                margin: "0 0 16px",
+                width: "415px",
+                margin: 0,
+                color: "rgb(255, 255, 255)",
+                fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+                fontFeatureSettings: '"salt"',
+                fontSize: "40px",
+                fontWeight: 500,
+                lineHeight: "48px",
+                letterSpacing: "-1.2px",
+                WebkitFontSmoothing: "antialiased",
+                textRendering: "optimizeLegibility",
               }}
             >
               Soshie, schedule social media posts for me
             </h3>
+            <div style={{ height: "24px" }} />
             <p
               style={{
-                fontSize: "16px",
-                fontWeight: 400,
-                color: "rgba(255,255,255,0.65)",
-                lineHeight: 1.65,
+                width: "415px",
                 margin: 0,
+                color: "rgb(255, 255, 255)",
+                fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+                fontFeatureSettings: '"salt"',
+                fontSize: "20px",
+                fontWeight: 400,
+                lineHeight: "26.6px",
+                letterSpacing: "-0.6px",
+                WebkitFontSmoothing: "antialiased",
+                textRendering: "optimizeLegibility",
               }}
             >
               Automate your social media game with AI for marketing. Write, create, and post
@@ -151,41 +216,101 @@ export default function Automations() {
           </div>
 
           {/* Image — right half, fills the column */}
-          <div style={{ position: "relative", overflow: "hidden" }} className="pt-16 px-4 ">
+          <div
+            className="automations-card-media"
+            style={{
+              width: "511px",
+              height: "584.242px",
+              paddingTop: "64px",
+              paddingLeft: "32px",
+              paddingRight: "32px",
+              boxSizing: "border-box",
+              overflowX: "clip",
+              overflowY: "clip",
+            }}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie.avif" loading="lazy" sizes="100vw" srcSet="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie-p-500.avif 500w, https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie.avif 830w" alt="" className="home-automations_card-image" />
+            <img
+              src="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie.avif"
+              loading="lazy"
+              sizes="511px"
+              srcSet="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie-p-500.avif 500w, https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e8395c6fe6685369d24_automation-soshie.avif 830w"
+              alt=""
+              style={{
+                width: "100%",
+                maxWidth: "100%",
+                height: "100%",
+                objectFit: "contain",
+                objectPosition: "50% 100%",
+                display: "block",
+                verticalAlign: "middle",
+              }}
+            />
           </div>
         </div>
 
         {/* ── Cassie — left column, text top / image bottom (full width, auto height) ── */}
         <div
+          className="automations-card automations-card-blue"
           style={{
-            background: "#3D7EF0",
-            borderRadius: "20px",
+            width: "488px",
+            height: "737.555px",
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+            backgroundImage: "linear-gradient(rgb(59, 130, 246), rgb(35, 76, 144))",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            borderRadius: "16px",
+            boxShadow: "rgba(51, 113, 212, 0.4) 0px 2px 70px 0px",
+            boxSizing: "border-box",
+            display: "grid",
+            gridAutoColumns: "1fr",
+            gridTemplateColumns: "486px",
+            gridTemplateRows: "319.562px 415.992px",
+            columnGap: 0,
+            rowGap: 0,
             overflow: "hidden",
-            display: "flex",
-            flexDirection: "column",
+            color: "rgb(255, 255, 255)",
+            fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+            fontFeatureSettings: '"salt"',
+            fontSize: "17px",
+            fontWeight: 400,
+            lineHeight: "25.5px",
+            WebkitFontSmoothing: "antialiased",
+            textRendering: "optimizeLegibility",
           }}
         >
-          <div style={{ padding: "40px 36px 20px" }}>
+          <div className="automations-card-content" style={{ width: "486px", height: "319.562px", boxSizing: "border-box", padding: "64px 48px 0" }}>
             <h3
               style={{
-                fontSize: "clamp(22px, 2vw, 30px)",
-                fontWeight: 700,
-                color: "#fff",
-                lineHeight: 1.2,
-                margin: "0 0 14px",
+                width: "390px",
+                margin: 0,
+                color: "rgb(255, 255, 255)",
+                fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+                fontFeatureSettings: '"salt"',
+                fontSize: "40px",
+                fontWeight: 500,
+                lineHeight: "48px",
+                letterSpacing: "-1.2px",
+                WebkitFontSmoothing: "antialiased",
+                textRendering: "optimizeLegibility",
               }}
             >
               Cassie, check my Facebook comments
             </h3>
+            <div style={{ height: "24px" }} />
             <p
               style={{
-                fontSize: "15px",
+                display: "inline",
+                color: "rgb(255, 255, 255)",
+                opacity: 0.6,
+                fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+                fontFeatureSettings: '"salt"',
+                fontSize: "20px",
                 fontWeight: 400,
-                color: "rgba(255,255,255,0.65)",
-                lineHeight: 1.65,
+                lineHeight: "26.6px",
+                letterSpacing: "-0.5px",
                 margin: 0,
+                WebkitFontSmoothing: "antialiased",
+                textRendering: "optimizeLegibility",
               }}
             >
               Engage your audience with business automation tools. Use AI for customer support
@@ -195,42 +320,97 @@ export default function Automations() {
           </div>
           {/* Full image, no fixed height — shows the complete composite */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e835d7ac382c6ebb990_automation-cassie.avif"
-            alt=""
-            style={{ width: "100%", height: "auto", display: "block", marginTop: "auto" }}
-          />
+          <div
+            className="automations-card-media"
+            style={{
+              width: "486px",
+              height: "415.992px",
+              paddingTop: "64px",
+              paddingLeft: "32px",
+              paddingRight: "32px",
+              boxSizing: "border-box",
+              overflowX: "clip",
+              overflowY: "clip",
+            }}
+          >
+            <img
+              src="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e835d7ac382c6ebb990_automation-cassie.avif"
+              alt=""
+              style={{
+                width: "100%",
+                maxWidth: "100%",
+                height: "100%",
+                display: "block",
+                objectFit: "contain",
+                objectPosition: "50% 100%",
+                verticalAlign: "middle",
+              }}
+            />
+          </div>
         </div>
 
         {/* ── Vizzy — right column, text top / image bottom (full width, auto height) ── */}
         <div
+          className="automations-card automations-card-yellow"
           style={{
-            background: "#D4930A",
-            borderRadius: "20px",
+            width: "488px",
+            height: "737.555px",
+            backgroundColor: "rgba(255, 255, 255, 0.1)",
+            backgroundImage: "linear-gradient(rgb(245, 158, 11), rgb(143, 92, 6))",
+            border: "1px solid rgba(255, 255, 255, 0.1)",
+            borderRadius: "16px",
+            boxShadow: "rgba(176, 114, 10, 0.4) 0px 0px 70px 0px",
+            boxSizing: "border-box",
+            display: "grid",
+            gridAutoColumns: "1fr",
+            gridTemplateColumns: "486px",
+            gridTemplateRows: "294.922px 424.633px",
+            columnGap: "16px",
+            rowGap: "16px",
             overflow: "hidden",
-            display: "flex",
-            flexDirection: "column",
+            color: "rgb(255, 255, 255)",
+            fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+            fontFeatureSettings: '"salt"',
+            fontSize: "17px",
+            fontWeight: 400,
+            lineHeight: "25.5px",
+            WebkitFontSmoothing: "antialiased",
+            textRendering: "optimizeLegibility",
           }}
         >
-          <div style={{ padding: "40px 36px 20px" }}>
+          <div className="automations-card-content" style={{ width: "486px", height: "294.922px", boxSizing: "border-box", padding: "64px 48px 0" }}>
             <h3
               style={{
-                fontSize: "clamp(22px, 2vw, 30px)",
-                fontWeight: 700,
-                color: "#fff",
-                lineHeight: 1.2,
-                margin: "0 0 14px",
+                width: "390px",
+                margin: 0,
+                color: "rgb(255, 255, 255)",
+                fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+                fontFeatureSettings: '"salt"',
+                fontSize: "40px",
+                fontWeight: 500,
+                lineHeight: "48px",
+                letterSpacing: "-1.2px",
+                WebkitFontSmoothing: "antialiased",
+                textRendering: "optimizeLegibility",
               }}
             >
               Vizzy, help me prepare for today&apos;s meetings
             </h3>
+            <div style={{ height: "24px" }} />
             <p
               style={{
-                fontSize: "15px",
+                display: "inline",
+                color: "rgb(255, 255, 255)",
+                opacity: 0.6,
+                fontFamily: '"GT Walsheim Pro", Arial, sans-serif',
+                fontFeatureSettings: '"salt"',
+                fontSize: "20px",
                 fontWeight: 400,
-                color: "rgba(255,255,255,0.65)",
-                lineHeight: 1.65,
+                lineHeight: "26.6px",
+                letterSpacing: "-0.5px",
                 margin: 0,
+                WebkitFontSmoothing: "antialiased",
+                textRendering: "optimizeLegibility",
               }}
             >
               Boost productivity with AI. Streamline business processes with daily summaries
@@ -238,11 +418,33 @@ export default function Automations() {
             </p>
           </div>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e83b8cd1c76d0434bef_automation-vizzy.avif"
-            alt=""
-            style={{ width: "100%", height: "auto", display: "block", marginTop: "auto" }}
-          />
+          <div
+            className="automations-card-media"
+            style={{
+              width: "486px",
+              height: "396.078px",
+              paddingTop: "64px",
+              paddingLeft: "32px",
+              paddingRight: "32px",
+              boxSizing: "border-box",
+              overflowX: "clip",
+              overflowY: "clip",
+            }}
+          >
+            <img
+              src="https://cdn.prod.website-files.com/661d4f6d81ac1042b721396c/67477e83b8cd1c76d0434bef_automation-vizzy.avif"
+              alt=""
+              style={{
+                width: "100%",
+                maxWidth: "100%",
+                height: "100%",
+                display: "block",
+                objectFit: "contain",
+                objectPosition: "50% 100%",
+                verticalAlign: "middle",
+              }}
+            />
+          </div>
         </div>
 
       </div>
