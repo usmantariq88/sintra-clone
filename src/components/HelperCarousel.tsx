@@ -186,35 +186,64 @@ const PrevIcon = () => (
   </svg>
 );
 
+const CLONE_COUNT = 3;
+const extendedHelpers = [
+  ...HELPERS.slice(-CLONE_COUNT),
+  ...HELPERS,
+  ...HELPERS.slice(0, CLONE_COUNT),
+];
+
 export default function HelperCarousel() {
-  const [active, setActive] = useState(0);
+  // idx is position in extendedHelpers; real items start at CLONE_COUNT
+  const [idx, setIdx] = useState(CLONE_COUNT);
+  const [isAnimated, setIsAnimated] = useState(true);
   const [dims, setDims] = useState<Dims>(() =>
     calcDims(typeof window !== "undefined" ? window.innerWidth : 1280)
   );
-  const [maxIdx, setMaxIdx] = useState(HELPERS.length - 3);
 
   const touchX = useRef(0);
   const touchY = useRef(0);
 
+  // Preload poster images for leading clones so first backward swipe has no black flash
+  useEffect(() => {
+    HELPERS.slice(-CLONE_COUNT).forEach(h => {
+      const img = new window.Image();
+      img.src = h.poster;
+    });
+  }, []);
+
   useEffect(() => {
     const update = () => {
       const vw = window.innerWidth;
-      const d = calcDims(vw);
-      setDims(d);
-      setMaxIdx(Math.max(0, HELPERS.length - d.visibleCount));
+      setDims(calcDims(vw));
     };
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
 
+  const goNext = () => setIdx(prev => prev + 1);
+  const goPrev = () => setIdx(prev => prev - 1);
+
+  const handleTransitionEnd = () => {
+    const N = HELPERS.length;
+    if (idx < CLONE_COUNT) {
+      setIsAnimated(false);
+      setIdx(idx + N);
+    } else if (idx >= CLONE_COUNT + N) {
+      setIsAnimated(false);
+      setIdx(idx - N);
+    }
+  };
+
   useEffect(() => {
-    setActive(prev => Math.min(prev, maxIdx));
-  }, [maxIdx]);
+    if (!isAnimated) {
+      requestAnimationFrame(() => requestAnimationFrame(() => setIsAnimated(true)));
+    }
+  }, [isAnimated]);
 
-  const goNext = () => setActive(prev => Math.min(prev + 1, maxIdx));
-  const goPrev = () => setActive(prev => Math.max(prev - 1, 0));
-
+  // active is 0-based position in real HELPERS array
+  const active = idx - CLONE_COUNT;
   const tx = dims.leftPad - active * (dims.cardW + dims.gap);
 
   const arrowBase: React.CSSProperties = {
@@ -288,9 +317,8 @@ export default function HelperCarousel() {
         {/* Prev arrow */}
         <button
           onClick={goPrev}
-          disabled={active === 0}
           aria-label="Previous helper"
-          style={{ ...arrowBase, left: `${dims.arrowInset}px`, opacity: active === 0 ? 0.35 : 1, cursor: active === 0 ? "not-allowed" : "pointer" }}
+          style={{ ...arrowBase, left: `${dims.arrowInset}px` }}
         >
           <PrevIcon />
         </button>
@@ -298,9 +326,8 @@ export default function HelperCarousel() {
         {/* Next arrow */}
         <button
           onClick={goNext}
-          disabled={active >= maxIdx}
           aria-label="Next helper"
-          style={{ ...arrowBase, right: `${dims.arrowInset}px`, opacity: active >= maxIdx ? 0.35 : 1, cursor: active >= maxIdx ? "not-allowed" : "pointer" }}
+          style={{ ...arrowBase, right: `${dims.arrowInset}px` }}
         >
           <NextIcon />
         </button>
@@ -312,14 +339,15 @@ export default function HelperCarousel() {
             flexDirection: "row",
             alignItems: "flex-start",
             transform: `translate3d(${tx}px, 0px, 0px)`,
-            transition: "transform 0.42s cubic-bezier(0.4, 0, 0.2, 1)",
+            transition: isAnimated ? "transform 0.42s cubic-bezier(0.4, 0, 0.2, 1)" : "none",
             willChange: "transform",
           }}
+          onTransitionEnd={handleTransitionEnd}
         >
-          {HELPERS.map((h) => {
+          {extendedHelpers.map((h, i) => {
             return (
               <div
-                key={h.id}
+                key={`${h.id}-${i}`}
                 style={{ flexShrink: 0, width: `${dims.cardW}px`, marginRight: `${dims.gap}px` }}
               >
                 <a
@@ -337,6 +365,7 @@ export default function HelperCarousel() {
                   <video
                     poster={h.poster}
                     autoPlay muted loop playsInline
+                    preload="metadata"
                     style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
                   >
                     <source src={h.mp4}  type="video/mp4" />
