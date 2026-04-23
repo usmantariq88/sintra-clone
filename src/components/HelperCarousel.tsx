@@ -122,13 +122,9 @@ function calcDims(vw: number): Dims {
       leftPad: sideGutter,
       arrowInset: isPhone ? 6 : 16,
       arrowSize: isPhone ? 2.1 : 3.25,
-      overlayW: isPhone ? 0 : 76,
-      overlayGradL: isPhone
-        ? "transparent"
-        : "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
-      overlayGradR: isPhone
-        ? "transparent"
-        : "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
+      overlayW: 0,
+      overlayGradL: "transparent",
+      overlayGradR: "transparent",
       containerW: isPhone ? "95%" : "90%",
       visibleCount: 1,
       nameFontSize: isPhone ? "1.25rem" : "1.875rem",
@@ -197,9 +193,7 @@ export default function HelperCarousel() {
   // idx is position in extendedHelpers; real items start at CLONE_COUNT
   const [idx, setIdx] = useState(CLONE_COUNT + 11);
   const [isAnimated, setIsAnimated] = useState(true);
-  const [dims, setDims] = useState<Dims>(() =>
-    calcDims(typeof window !== "undefined" ? window.innerWidth : 1280)
-  );
+  const [dims, setDims] = useState<Dims>(() => calcDims(1280));
 
   const touchX = useRef(0);
   const touchY = useRef(0);
@@ -281,35 +275,39 @@ export default function HelperCarousel() {
         }}
       >
         
-        {/* Left dark fade overlay covering the full card area (video + text). */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            left: 0,
-            top: 0,
-            bottom: 0,
-            width: `${dims.overlayW}px`,
-            background: dims.overlayGradL,
-            zIndex: 15,
-            pointerEvents: "none",
-          }}
-        />
+        {dims.overlayW > 0 && (
+          <>
+            {/* Left dark fade overlay covering the full card area (video + text). */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                left: 0,
+                top: 0,
+                bottom: 0,
+                width: `${dims.overlayW}px`,
+                background: dims.overlayGradL,
+                zIndex: 15,
+                pointerEvents: "none",
+              }}
+            />
 
-        {/* Right dark fade overlay covering the full card area (video + text). */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            right: 0,
-            top: 0,
-            bottom: 0,
-            width: `${dims.overlayW}px`,
-            background: dims.overlayGradR,
-            zIndex: 15,
-            pointerEvents: "none",
-          }}
-        />
+            {/* Right dark fade overlay covering the full card area (video + text). */}
+            <div
+              aria-hidden="true"
+              style={{
+                position: "absolute",
+                right: 0,
+                top: 0,
+                bottom: 0,
+                width: `${dims.overlayW}px`,
+                background: dims.overlayGradR,
+                zIndex: 15,
+                pointerEvents: "none",
+              }}
+            />
+          </>
+        )}
 
 
         {/* Prev arrow */}

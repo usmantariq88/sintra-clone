@@ -594,6 +594,28 @@ export default function Reviews() {
             white-space: nowrap !important;
           }
         }
+
+        /* ── Narrow iPhone width tuning (~375px only) ─────────────────── */
+        @media (min-width: 370px) and (max-width: 380px) {
+          .rv-toggle-btn {
+            height: auto !important;
+            min-height: 48px !important;
+            column-gap: 8px !important;
+            padding-top: 6px !important;
+            padding-bottom: 6px !important;
+            padding-right: 10px !important;
+          }
+          .rv-toggle-label {
+            font-size: 14px !important;
+            line-height: 1.15 !important;
+          }
+          .rv-toggle-action-text {
+            font-size: 14px !important;
+          }
+          .rv-toggle-sep {
+            margin-right: 4px !important;
+          }
+        }
       `}</style>
     </section>
   );

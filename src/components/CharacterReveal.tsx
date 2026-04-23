@@ -12,6 +12,7 @@ export default function CharacterReveal() {
   const sectionRef = useRef<HTMLElement>(null);
   const [dotLottie, setDotLottie] = useState<DotLottie | null>(null);
   const [totalFrames, setTotalFrames] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   const targetFrameRef = useRef(0);
   const currentFrameRef = useRef(0);
@@ -35,15 +36,23 @@ export default function CharacterReveal() {
   useEffect(() => {
     const calc = () => {
       const viewportH = window.visualViewport?.height ?? window.innerHeight;
+      const viewportW = window.innerWidth;
 
-      if (window.innerWidth <= MOBILE_BP) {
-        const vh = Math.round(viewportH);
-        const vw = Math.ceil(vh * ASPECT);
-        setWrapW(`${vw}px`);
-        setWrapH(`${vh}px`);
+      if (viewportW <= MOBILE_BP) {
+        setIsMobile(true);
+        // Keep the character readable on phones without overfilling the viewport.
+        const mobileTargetH = Math.round(viewportH * 0.78);
+        const maxMobileW = Math.round(viewportW * 1.08);
+        const aspectW = Math.ceil(mobileTargetH * ASPECT);
+        const finalW = Math.min(aspectW, maxMobileW);
+        const finalH = Math.round(finalW / ASPECT);
+
+        setWrapW(`${finalW}px`);
+        setWrapH(`${finalH}px`);
         // Slightly longer runway on phones so the animation has enough scroll distance.
-        setSectionH(`${Math.round(vh * 1.75)}px`);
+        setSectionH(`${Math.round(viewportH * 1.75)}px`);
       } else {
+        setIsMobile(false);
         setWrapW("100vw");
         setWrapH(undefined);
         setSectionH("150vh");
@@ -77,12 +86,14 @@ export default function CharacterReveal() {
   // ── Scroll-driven lerp animation ───────────────────────────────────────────
   useEffect(() => {
     if (!dotLottie || totalFrames === 0) return;
+    const lerpFactor = isMobile ? 0.24 : 0.14;
+    const scrollCompletionFactor = isMobile ? 0.62 : 0.82;
 
-    // rAF loop continuously eases currentFrame → targetFrame (lerp 0.14)
+    // rAF loop continuously eases currentFrame → targetFrame.
     const tick = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
       if (Math.abs(diff) > 0.05) {
-        currentFrameRef.current += diff * 0.14;
+        currentFrameRef.current += diff * lerpFactor;
         dotLottie.setFrame(currentFrameRef.current);
       } else if (Math.abs(diff) > 0.001) {
         currentFrameRef.current = targetFrameRef.current;
@@ -96,9 +107,9 @@ export default function CharacterReveal() {
       const section = sectionRef.current;
       if (!section) return;
       const rect = section.getBoundingClientRect();
-      // 0.82× → animation completes slightly before end of scroll runway
+      // Mobile completes earlier to feel faster on shorter scroll ranges.
       const progress = Math.min(
-        Math.max((window.innerHeight - rect.top) / (section.offsetHeight * 0.82), 0),
+        Math.max((window.innerHeight - rect.top) / (section.offsetHeight * scrollCompletionFactor), 0),
         1
       );
       // Start slightly into the timeline so the character is visible immediately.
@@ -112,7 +123,7 @@ export default function CharacterReveal() {
       window.removeEventListener("scroll", handleScroll);
       if (rafIdRef.current !== null) cancelAnimationFrame(rafIdRef.current);
     };
-  }, [dotLottie, totalFrames]);
+  }, [dotLottie, totalFrames, isMobile]);
 
   return (
     <>
@@ -122,7 +133,7 @@ export default function CharacterReveal() {
           style={{
             position: "sticky",
             top: 0,
-            height: wrapH ?? "100dvh",
+            height: "100dvh",
             overflow: "hidden",
             background: "#000",
           }}
@@ -151,9 +162,9 @@ export default function CharacterReveal() {
           <div
             style={{
               position: "absolute",
-              top: 0,
+              top: isMobile ? "50%" : 0,
               left: "50%",
-              transform: "translateX(-50%)",
+              transform: isMobile ? "translate(-50%, -50%)" : "translateX(-50%)",
               width: wrapW,
               height: wrapH,
             }}
@@ -200,6 +211,9 @@ export default function CharacterReveal() {
       <section
         style={{
           background: "#000",
+          marginTop: isMobile ? "-260px" : 0,
+          position: "relative",
+          zIndex: isMobile ? 30 : 1,
           padding: "0 clamp(16px, 2.78vw, 40px) clamp(64px, 6.94vw, 100px)",
         }}
       >
