@@ -122,12 +122,12 @@ function calcDims(vw: number): Dims {
       leftPad: sideGutter,
       arrowInset: isPhone ? 6 : 16,
       arrowSize: isPhone ? 2.1 : 3.25,
-      overlayW: isPhone ? Math.max(20, sideGutter + 4) : 76,
+      overlayW: isPhone ? 0 : 76,
       overlayGradL: isPhone
-        ? "linear-gradient(to right, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)"
+        ? "transparent"
         : "linear-gradient(to right, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
       overlayGradR: isPhone
-        ? "linear-gradient(to left, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.35) 45%, transparent 100%)"
+        ? "transparent"
         : "linear-gradient(to left, rgba(0,0,0,1) 0%, rgba(0,0,0,0.94) 36%, rgba(0,0,0,0.6) 66%, transparent 100%)",
       containerW: isPhone ? "95%" : "90%",
       visibleCount: 1,

@@ -135,8 +135,8 @@ export default function Hero() {
 
           <div>
             <a
-              href="/pricing"
               style={{
+                cursor: "pointer",
                 display: "inline-flex",
                 alignItems: "center",
                 justifyContent: "center",
