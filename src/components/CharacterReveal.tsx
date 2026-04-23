@@ -7,6 +7,7 @@ import type { DotLottie } from "@lottiefiles/dotlottie-react";
 // Lottie canvas native dimensions — 3840×2650 landscape (aspect = 1.4491…)
 const ASPECT = 3840 / 2650;
 const MOBILE_BP = 768;
+const MOBILE_SECTION_OFFSET = 220;
 
 export default function CharacterReveal() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -94,7 +95,7 @@ export default function CharacterReveal() {
   useEffect(() => {
     if (!dotLottie || totalFrames === 0) return;
     const lerpFactor = isMobile ? 0.24 : 0.14;
-    const scrollCompletionFactor = isMobile ? 0.62 : 0.82;
+    const desktopScrollCompletionFactor = 0.82;
 
     // rAF loop continuously eases currentFrame → targetFrame.
     const tick = () => {
@@ -114,11 +115,13 @@ export default function CharacterReveal() {
       const section = sectionRef.current;
       if (!section) return;
       const rect = section.getBoundingClientRect();
-      // Mobile completes earlier to feel faster on shorter scroll ranges.
-      const progress = Math.min(
-        Math.max((window.innerHeight - rect.top) / (section.offsetHeight * scrollCompletionFactor), 0),
-        1
-      );
+      // Mobile timeline is offset-aware: starts when the shifted section enters
+      // and reaches final frame once the reveal is fully settled in view.
+      // Desktop keeps the original viewport-entry based progression.
+      const rawProgress = isMobile
+        ? (window.innerHeight - (rect.top + MOBILE_SECTION_OFFSET)) / window.innerHeight
+        : (window.innerHeight - rect.top) / (section.offsetHeight * desktopScrollCompletionFactor);
+      const progress = Math.min(Math.max(rawProgress, 0), 1);
       // Start slightly into the timeline so the character is visible immediately.
       const startFrame = Math.floor(totalFrames * 0.06);
       targetFrameRef.current = startFrame + progress * Math.max(totalFrames - 1 - startFrame, 1);
@@ -135,7 +138,10 @@ export default function CharacterReveal() {
   return (
     <>
       {/* 150vh = scroll runway; sticky child locks to viewport while parent scrolls */}
-      <section ref={sectionRef} style={{ height: sectionH, background: "#000" }}>
+      <section
+        ref={sectionRef}
+        style={{ height: sectionH, background: "#000", marginTop: isMobile ? "-220px" : 0 }}
+      >
         <div
           style={{
             position: "sticky",

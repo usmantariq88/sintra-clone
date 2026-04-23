@@ -164,6 +164,13 @@ export default function Hero() {
       </div>
 
       <style>{`
+        /* Keep hero above following section overlap on phones only */
+        @media (max-width: 768px) {
+          #home {
+            z-index: 40;
+          }
+        }
+
         /* ── Mobile overlays (<640px) ─────────────────────────────────── */
         @media (max-width: 639px) {
           .hero-overlay-left {
