@@ -112,7 +112,7 @@ export default function Navbar() {
                 onMouseLeave={isProducts ? scheduleClose : isFeatures ? scheduleCloseFeatures : isResources ? scheduleCloseResources : undefined}
               >
                 <a
-                  href="#"
+                  href="#home"
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -175,7 +175,7 @@ export default function Navbar() {
                       zIndex: 100,
                     }}
                   >
-                    {[{ label: "Brain AI", href: "/features/brain-ai" }, { label: "Integrations", href: "/integrations" }].map((item) => (
+                    {[{ label: "Brain AI", href: "#home" }, { label: "Integrations", href: "#home" }].map((item) => (
                       <a
                         key={item.label}
                         href={item.href}
@@ -221,12 +221,12 @@ export default function Navbar() {
                     }}
                   >
                     {[
-                      { label: "Blog",                href: "/blog"               },
-                      { label: "Case studies",        href: "/case-studies"       },
-                      { label: "FAQ",                 href: "/faq"                },
-                      { label: "Help center",         href: "/help-center"        },
-                      { label: "What is an AI Helper",href: "/what-is-an-ai-helper"},
-                      { label: "Book a Demo",         href: "/book-a-demo"        },
+                      { label: "Blog",                href: "#home" },
+                      { label: "Case studies",        href: "#home" },
+                      { label: "FAQ",                 href: "#home" },
+                      { label: "Help center",         href: "#home" },
+                      { label: "What is an AI Helper",href: "#home" },
+                      { label: "Book a Demo",         href: "#home" },
                     ].map((item) => (
                       <a
                         key={item.label}
@@ -274,7 +274,7 @@ export default function Navbar() {
                   >
                     {/* Header */}
                     <a
-                      href="/ai-team"
+                      href="#home"
                       style={{
                         display: "block",
                         textAlign: "center",
@@ -307,7 +307,7 @@ export default function Navbar() {
                       {agents.map((agent) => (
                         <a
                           key={agent.name}
-                          href="#"
+                          href="#home"
                           style={{
                             display: "flex",
                             alignItems: "center",
@@ -356,7 +356,7 @@ export default function Navbar() {
 
         <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "8px" }}>
           <a
-            href="#"
+            href="#home"
             style={{
               fontSize: "17px",
               fontWeight: 400,
@@ -375,7 +375,7 @@ export default function Navbar() {
           </a>
 
           <a
-            href="#"
+            href="#home"
             style={{
               display: "flex",
               alignItems: "center",
@@ -430,7 +430,7 @@ export default function Navbar() {
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
 
-        <a href="#" style={{ display: "block", lineHeight: 0 }}>
+        <a href="#home" style={{ display: "block", lineHeight: 0 }}>
           <Image
             src="/logo.webp"
             alt="Sintra"
@@ -456,7 +456,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <a
               key={link.label}
-              href="#"
+              href="#home"
               style={{
                 display: "flex",
                 alignItems: "center",
@@ -481,7 +481,7 @@ export default function Navbar() {
           ))}
           <div style={{ paddingTop: "20px", display: "flex", flexDirection: "column", gap: "12px" }}>
             <a
-              href="#"
+              href="#home"
               style={{
                 textAlign: "center",
                 padding: "12px",
@@ -495,7 +495,7 @@ export default function Navbar() {
               Log in
             </a>
             <a
-              href="#"
+              href="#home"
               style={{
                 textAlign: "center",
                 padding: "14px",

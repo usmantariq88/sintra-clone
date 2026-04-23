@@ -84,7 +84,7 @@ export default function Footer() {
             <div className="block w-full xl:h-[490px]">
               <div className="flex w-full flex-col items-start justify-between gap-y-12 sm:gap-y-14 xl:h-[276px] xl:flex-row xl:items-start xl:gap-x-[96px] xl:gap-y-[96px]">
                 <div className="w-full max-w-[210px] flex-none">
-                  <a href="#" className="mb-6 block h-6 w-[90px] cursor-pointer overflow-clip">
+                  <a href="#home" className="mb-6 block h-6 w-[90px] cursor-pointer overflow-clip">
                     <Image
                       src="/logoBlue.svg"
                       alt="Sintra"
@@ -116,7 +116,7 @@ export default function Footer() {
                         {col.links.map((link) => (
                           <li key={link}>
                             <a
-                              href="#"
+                              href="#home"
                               className="block cursor-pointer text-[17px] font-normal leading-6 tracking-[-0.34px] text-[#737373] transition-colors hover:text-[#5f5f5f]"
                             >
                               {link}
@@ -131,7 +131,7 @@ export default function Footer() {
 
               <div className="mt-10 flex w-full items-start justify-between sm:mt-12 xl:mt-14 xl:h-[150px] xl:items-center">
                 <div className="w-full max-w-[272px] sm:max-w-[316px]">
-                  <a href="#" className="block w-fit cursor-pointer" aria-label="Trustpilot reviews">
+                  <a href="#home" className="block w-fit cursor-pointer" aria-label="Trustpilot reviews">
                     <div className="relative h-[33px] w-[136px] overflow-hidden">
                       <TrustpilotLogo />
                     </div>

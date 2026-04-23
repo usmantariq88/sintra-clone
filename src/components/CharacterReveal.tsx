@@ -10,6 +10,7 @@ const MOBILE_BP = 768;
 
 export default function CharacterReveal() {
   const sectionRef = useRef<HTMLElement>(null);
+  const lastViewportWidthRef = useRef<number | null>(null);
   const [dotLottie, setDotLottie] = useState<DotLottie | null>(null);
   const [totalFrames, setTotalFrames] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -35,10 +36,17 @@ export default function CharacterReveal() {
 
   useEffect(() => {
     const calc = () => {
-      const viewportH = window.visualViewport?.height ?? window.innerHeight;
+      const viewportH = window.innerHeight;
       const viewportW = window.innerWidth;
+      const lastViewportW = lastViewportWidthRef.current;
 
       if (viewportW <= MOBILE_BP) {
+        // Mobile browsers can fire resize while scrolling (URL bar collapse/expand).
+        // Ignore those height-only resizes to keep below-text position stable.
+        if (lastViewportW !== null && Math.abs(viewportW - lastViewportW) < 2) {
+          return;
+        }
+        lastViewportWidthRef.current = viewportW;
         setIsMobile(true);
         // Keep the character readable on phones without overfilling the viewport.
         const mobileTargetH = Math.round(viewportH * 0.78);
@@ -49,9 +57,10 @@ export default function CharacterReveal() {
 
         setWrapW(`${finalW}px`);
         setWrapH(`${finalH}px`);
-        // Slightly longer runway on phones so the animation has enough scroll distance.
-        setSectionH(`${Math.round(viewportH * 1.75)}px`);
+        // Keep parent section height fixed to match the intended mobile reveal block.
+        setSectionH("855px");
       } else {
+        lastViewportWidthRef.current = viewportW;
         setIsMobile(false);
         setWrapW("100vw");
         setWrapH(undefined);
@@ -62,11 +71,9 @@ export default function CharacterReveal() {
     calc();
     window.addEventListener("resize", calc);
     window.addEventListener("orientationchange", calc);
-    window.visualViewport?.addEventListener("resize", calc);
     return () => {
       window.removeEventListener("resize", calc);
       window.removeEventListener("orientationchange", calc);
-      window.visualViewport?.removeEventListener("resize", calc);
     };
   }, []);
 
@@ -133,7 +140,7 @@ export default function CharacterReveal() {
           style={{
             position: "sticky",
             top: 0,
-            height: "100dvh",
+            height: isMobile ? "855px" : "100dvh",
             overflow: "hidden",
             background: "#000",
           }}

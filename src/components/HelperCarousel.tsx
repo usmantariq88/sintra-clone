@@ -346,8 +346,8 @@ export default function HelperCarousel() {
                 key={`${h.id}-${i}`}
                 style={{ flexShrink: 0, width: `${dims.cardW}px`, marginRight: `${dims.gap}px` }}
               >
-                <a
-                  href={h.href}
+                  <a
+                  href="#home"
                   style={{
                     display: "block",
                     textDecoration: "none",
@@ -376,7 +376,7 @@ export default function HelperCarousel() {
                     paddingRight: "1rem",
                   }}
                 >
-                  <a href={h.href} style={{ textDecoration: "none", display: "inline-block", marginBottom: "0.5rem" }}>
+                  <a href="#home" style={{ textDecoration: "none", display: "inline-block", marginBottom: "0.5rem" }}>
                     <h2
                       style={{
                         fontSize: dims.nameFontSize,
@@ -426,7 +426,7 @@ export default function HelperCarousel() {
         }}
       >
         <a
-          href="/ai-team"
+          href="#home"
           style={{
             display: "inline-flex",
             alignItems: "center",
